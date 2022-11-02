@@ -8,7 +8,7 @@ primary_tag: software-product-function>sap-cloud-application-programming-model
 ---
  
 ## Prerequisites
-- You use [SAPUI5](https://sapui5.hana.ondemand.com/) in version 1.XY.0 or higher. (TODO Test recorder support)
+- You use [SAPUI5](https://sapui5.hana.ondemand.com/) in version 1.105.0 or higher.
 - You have installed and configured a local Git client.
 - You have installed [Node.js](https://nodejs.org/en/) in version 14.x or higher.
 - You have installed [Visual Studio Code](https://code.visualstudio.com/).
@@ -56,7 +56,7 @@ The following graphic shows the positioning of system tests with wdi5 compared t
 
 ### About the SAPUI5 Test Recorder
 
-The SAPUI5 Test Recorder is a tool that helps you create integration and system tests. You can use it in any SAPUI5 application to inspect its user interface, view the control properties, and get code snippets for OPA5 and wdi5 tests. As of version 1.74, it is part of the SAPUI5 framework. TODO: check version
+The SAPUI5 Test Recorder is a tool that helps you create integration and system tests. You can use it in any SAPUI5 application to inspect its user interface, view the control properties, and get code snippets for OPA5 and wdi5 tests. As of version 1.74, it is part of the SAPUI5 framework and since version 1.105 there is a wdi5-specific dialect included.
 
 > For more information about the SAPUI5 Test Recorder, see [Test Recorder](https://sapui5.hana.ondemand.com/#/topic/2535ef9272064cb6bd6b44e5402d531d).
 
@@ -365,7 +365,7 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
 20. Copy the generated code snippet from the Test Recorder into the `assertions` section in your `newBookPage.js` and name the function `iSeeEditButton`. - TODO: Update
 
-    Assign the generated snippet to the variable `var editButton =`. - TODO: Update const instead of var
+    Assign the generated snippet to the variable `const editButton =`.
 
 21. Below, add an expect statement:
 
@@ -451,136 +451,8 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 [DONE]
 [ACCORDION-END]
 
-[ACCORDION-BEGIN [Step 5: ](Start the Jenkins build server)] - TODO: Q3/2022
-
-Start the CX Server as build server for your CI/CD pipeline.
-
-The CX Server is part of project "Piper". It's a lifecycle-management tool to bootstrap a preconfigured Jenkins instance on your own (virtual) server. It uses Docker images and, thanks to its lifecycle-management scripts, can be used out-of-the-box.
-
->For more information about the CX Server, see:
-
->- [Infrastructure](https://sap.github.io/jenkins-library/infrastructure/overview/) (project "Piper" documentation)
->- [https://github.com/SAP/devops-docker-cx-server](https://github.com/SAP/devops-docker-cx-server) (CX Server on GitHub)
-
-Depending on your operating system, choose one of the following options:
-
-### Linux and Mac:
-
-
-1. Create a new directory and initialize the CX Server by executing the following command:
-
-    ```Shell/Bash
-    docker run -it --rm -u $(id -u):$(id -g) -v "${PWD}":/cx-server/mount/ ppiper/cx-server-companion:latest init-cx-server
-    ```
-
-    As a result, a few files are created in your working directory.
-
-2. Start the Jenkins server through the following two commands:
-
-    ```Shell/Bash
-    chmod +x ./cx-server
-    ./cx-server start
-    ```
-
-3. Open Jenkins in a browser of your choice by entering the IP or domain name of your host machine. For more information, see [Operations Guide for CX Server](https://github.com/SAP/devops-docker-cx-server/blob/master/docs/operations/cx-server-operations-guide.md).
-
-4. Jenkins asks you to log in to create new jobs:
-
-    !![Jenkins Welcome Screen](jenkins-login.png)
-
-    For the login, use the default credentials. To view them, run one of the following commands:
-
-    ```Shell/Bash
-    ./cx-server initial-credentials
-    ```
-
-    >**Note:** We recommend to change the default credentials immediately.
-
-### Windows:
-
-1. Configure your Docker settings by in Docker, choosing **Settings**.
-
-2. Choose **General** and deactivate **Use the WSL 2 based engine**. Also, make sure that Docker is running.
-
-    !![Docker resource settings](DockerSettings.png)
-
-2. Choose **Resources** and extend the **Memory** to at least 4GB:
-
-    !![Docker resource settings](settings_resources.png)
-
-3. Choose **File Sharing** and add a folder from your local file system to which you want to grant file share permissions.
-
-4. Initialize the CX Server by executing the following command. Replace the brackets with the path to the folder to which you've granted file share permissions.
-
-    ```Shell/Bash
-    docker run -it -v <PATH TO YOUR FOLDER>:/cx-server/mount/ ppiper/cx-server-companion:latest init-cx-server
-    ```
-
-    As a result, a new folder called is created on your local file system. In this folder, you can find the configurations that are used by the CX Server to start the Jenkins instance.
-
-5. In your folder with the file share permissions, start the Jenkins server through the following command:
-
-    ```Shell/Bash
-    cx-server.bat start
-    ```
-
-6. Open Jenkins in a browser of your choice by entering the IP or domain name of your host machine. For more information, see [Operations Guide for CX Server](https://github.com/SAP/devops-docker-cx-server/blob/master/docs/operations/cx-server-operations-guide.md).
-
-4. Jenkins asks you to log in to create new jobs:
-
-    !![Jenkins Welcome Screen](jenkins-login.png)
-
-    For the login, use the default credentials. To view them, run the following command:
-
-    ```Shell/Bash
-    cx-server initial-credentials
-    ```
-
-    >**Note:** We recommend to change the default credentials immediately.
-
-
-[DONE]
-[ACCORDION-END]
-
-[ACCORDION-BEGIN [Step 6: ](Create and run your CI/CD pipeline)]
-
-Create and run a build job for your project in Jenkins.
-
-1. From the navigation pane in Jenkins, choose **New Item**.
-
-2. Enter a name for your build job (for example, *TechEd-2020*), select **Pipeline**, and choose **OK**.
-
-3. For **Definition** in the **Pipeline** section, choose **Pipeline script from SCM**.
-
-4. For **SCM**, choose **Git**.
-
-5. In your repository in GitHub, choose **Code**, copy your repository URL for HTTPS, and select branch "*/main"
-
-    !![wdi5 Test Report in Jenkins](Jenkins-main.png)
-
-6. In Jenkins, enter your URL as **Repository URL** and choose **Save**.
-
-    ```URL
-    https://github.com/SAP-samples/teched2020-DEV267.git
-    ```
-
-7. Leave all other fields with their default values and choose **Save**.
-
-    The Jenkins job, which executes wdi5 tests, is implemented in the Jenkinsfile, which can be found in the root directory of your project.
-
-    In this file, there is a pipeline step, which first cleans up the workspace from old files and then checks out the repository that you've provided in the previous step. After that, the project "Piper" step prepares the environment by installing the required tools, installing and starting the CAP server, and executing your wdi5 tests. After the completion of the tests, it collects the report and publishes it to Jenkins.
-
-8. Choose your pipeline and branch, and choose **Build Now**.
-
-9. To view the status of your build, choose **wdi5 Test Report** from the navigation pane:
-
-    !![wdi5 Test Report in Jenkins](TestReportInPiper.png)
-
-[DONE]
-[ACCORDION-END]
-
 ---
 
 **Congratulations!**
 
-You have successfully created different system tests with wdi5 for a CAP-based project and integrated them into a continuous integration and delivery pipeline. - TODO: Update Q3/2022
+You have successfully created different system tests with wdi5 for a CAP-based project. - TODO: Update Q3/2022
