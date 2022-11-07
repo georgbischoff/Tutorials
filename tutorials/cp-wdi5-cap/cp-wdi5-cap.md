@@ -47,11 +47,11 @@ The following graphic shows the positioning of system tests with wdi5 compared t
 
 ![Comparison of different testing methods](test-comparison.png) TODO(Laura): Update images
 
->For more information about testing with wdi5, have a look at these blogs:
+>For more information about testing with wdi5, have a look at these blogs and presentations:
 
->- [Use wdio and wdi5 for testing UI5 apps](https://blogs.sap.com/2021/11/29/use-wdio-and-wdi5-for-testing-ui5-apps/) => TODO(Simon) Remove older blog?
 >- [the king is dead – long live the king: wdi5 as UIVeri5 successor](https://blogs.sap.com/2022/02/12/the-king-is-dead-long-live-the-king-wdi5-as-uiveri5-successor/)
 - [the ecosystem evolving around wdi5](https://blogs.sap.com/2022/08/30/the-ecosystem-evolving-around-wdi5/)
+- [Testing UI5 Apps with wdi5 - Zero to Hero to Continuous Integration](https://www.youtube.com/watch?v=f-0ztSnb2-c)
 
 ### About the SAPUI5 Test Recorder
 
@@ -77,32 +77,31 @@ Project "Piper" is one of SAP's solutions for continuous integration and deliver
 
 In Visual Studio Code, set up and run your bookshop application.
 
-1. In Visual Studio Code, choose **View** **→** **Command Palette…** **→** **Git:Clone**. => TODO(Georg,Simon): Fork + Clone?
-
-2. As **Repository URL**, enter:
-
+1. Before you start working, fork the [Repository](https://github.com/SAP-samples/cap-bookshop-wdi5) to your personal github account. Here you find documentation on how to [fork GitHub repositories](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository).
+2. In Visual Studio Code, choose **View** **→** **Command Palette…** **→** **Git:Clone**.
+3. As **Repository URL**, enter:
     ```URL
-    https://github.com/SAP-samples/cap-bookshop-wdi5.git
+    https://github.com/<your github username>/SAP-samples/cap-bookshop-wdi5.git
     ```
-3. Choose **Select Repository Location** and select a folder into which to clone the test repository.
+4. Choose **Select Repository Location** and select a folder into which to clone the test repository.
 
-4. When asked if you would like to open the cloned repository, choose **Open**.
+5. When asked if you would like to open the cloned repository, choose **Open**.
 
     As a result, the project `CAP-BOOKSHOP-WDI5` is loaded into the **EXPLORER** pane and you can see its resources in the outline:
 
     ![Resources of the project in the explorer pane](FolderStructure.png) => TODO update image
 
-5. In Visual Studio Code, choose **Terminal** **→** **New Terminal**.
+6. In Visual Studio Code, choose **Terminal** **→** **New Terminal**.
 
     ![New Terminal in Visual Studio Code](Terminal.gif)
 
-6. Use the following command to install the npm packages:
+7. Use the following command to install the npm packages:
 
     ```Shell/Bash
     npm install
     ```
 
-7. To start your bookshop application, execute the following commands:
+8. To start your bookshop application, execute the following commands:
 
     ```Shell/Bash
     npm run fiori
@@ -112,36 +111,13 @@ In Visual Studio Code, set up and run your bookshop application.
 
     ![Terminal response for the 'npm run fiori' command](cap_output.png) => TODO Update image
 
-8. In your project in the **EXPLORER** pane, choose **`fiori`** **→** **`app`** **→** **`admin-books`** **→** **`webapp`** **→** **`test`** **→** **`wdi5`**.
+9. In Visual Studio Code, choose **Terminal** **→** **New Terminal**, to start a second terminal window.
 
-    Here, you can see the files through which you can define system tests with wdi5:
+10.. Generate the `wdio.conf.js` file by using the guided installation of WebdriverIO.
 
-    ![Resources of the wdi5 folder in the explorer pane](UIVeri5FolderStructure.png) - TODO: Update image
+TODO: Quick install wdi5 https://ui5-community.github.io/wdi5/#/installation?id=a-quickstart-with-npm-init-wdi5 => Simon
 
-    >The `target\report` folder is created with the first test execution.
-
-
-    - (a) The `wdio.conf.js` file:
-
-         In this file, you can define the settings for wdio and the wdi5 plugin. Examples are the browser and reporter that are used and the URL to access the Fiori app under test. In this tutorial, we will use the guided installation of wdio to generate this file.
-
-    - (b) The `test.js` file (in this case, it's called `bookshop.test.js`): - TODO (Simon): test.js or spec.js
-
-         In this file, you'll define your test scenario, which comprises steps that are triggered one after the other. Within the test scenario, you'll refer to your page objects.
-
-    - (c) Page objects (in this case, you have `pageobjects/manageBooks.page.js` for the list of books that are added and the button to create a new book, and `pageobjects/newBook.page.js`  to provide the details of the new book):
-
-        Page objects are design patterns that represent a significant part of an app, for example, a view. They group two kinds of elements:
-
-           - Actions, for example, choosing the **Create** button to create a new book
-           - Assertions, for example, checking if the newly created book is displayed in the list of books
-
-         Page objects use locators to identify specific elements on the screen. Thereby, they allow test runners to see and do anything a real user would. Page objects reside in the `pageobjects` folder of your project.
-
-
-9. Generate the `wdio.conf.js` file by using the guided installation of WebdriverIO.
-
-10. Use the command `npm init wdio .` to call the wdio generator answer the questions as follows:
+11. Use the command `npm init wdio .` to call the wdio generator answer the questions as follows:
     | Question | Answer |
     | ----------- | ----------- |
     | Where is my automation backend located? | On my local machine |
@@ -155,7 +131,34 @@ In Visual Studio Code, set up and run your bookshop application.
     | What is the base url? | http://localhost:4004 |
     | Do you want me to run npm install | Y or yes |
 
-11. Open the created `wdio.conf.js` file and add the following snippet under `exports.config` to configure wdi5 correctly:
+12. In your project in the **EXPLORER** pane, choose **`fiori`** **→** **`app`** **→** **`admin-books`** **→** **`webapp`** **→** **`test`** **→** **`wdi5`**.
+
+    Here, you can see the files through which you can define system tests with wdi5:
+
+    ![Resources of the wdi5 folder in the explorer pane](UIVeri5FolderStructure.png) - TODO: Update image
+
+    >The `target\report` folder is created with the first test execution.
+
+
+    - (a) The `wdio.conf.js` file:
+
+         In this file, you can define the settings for wdio and the wdi5 plugin. Examples are the browser and reporter that are used and the URL to access the Fiori app under test.
+
+    - (b) The `test.js` file (in this case, it's called `bookshop.test.js`):
+
+         In this file, you'll define your test scenario, which comprises steps that are triggered one after the other. Within the test scenario, you'll refer to your page objects.
+
+    - (c) Page objects (in this case, you have `pageobjects/manageBooks.page.js` for the list of books that are added and the button to create a new book, and `pageobjects/newBook.page.js`  to provide the details of the new book):
+
+        Page objects are design patterns that represent a significant part of an app, for example, a view. They group two kinds of elements:
+
+           - Actions, for example, choosing the **Create** button to create a new book
+           - Assertions, for example, checking if the newly created book is displayed in the list of books
+
+         Page objects use locators to identify specific elements on the screen. Thereby, they allow test runners to see and do anything a real user would. Page objects reside in the `pageobjects` folder of your project.
+
+
+13. Open the created `wdio.conf.js` file and add the following snippet under `exports.config` to configure wdi5 correctly: - TODO: Remove?
 
     ```JavaScript
     wdi5: {
@@ -164,7 +167,7 @@ In Visual Studio Code, set up and run your bookshop application.
     },
     ```
 
-12. Add following snippets to configure the timeline reporter correctly in the `wdio.conf.js`:
+13. Add following snippets to configure the timeline reporter correctly in the `wdio.conf.js`:
 
     ```JavaScript
     const { TimelineService } = require("wdio-timeline-reporter/timeline-service");
@@ -192,9 +195,9 @@ In Visual Studio Code, set up and run your bookshop application.
     // ...
     ```
 
-13. Now, your project setup is ready. Make sure that your code looks as follows and choose **File** **→** **Save**.
+14. Now, your project setup is ready. Make sure that your code looks as follows and choose **File** **→** **Save**.
 
-    ![wdio.conf.js after finishing the project setup](confjs.png) - TODO: Update image
+    ![wdio.conf.js after finishing the project setup](confjs.png) - TODO: Update image Simon
 
 
 [VALIDATE_6]
@@ -404,21 +407,13 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
 19. In the bookshop application, right-click the **Edit** button and choose **Highlight**.
 
-20. On the right side of the Test Recorder window you find a section with Properties and Bindings. Click on the icon that is located on the left of the property *enabled*. This will `expect(enabled).toBeTruthy();` to the code snippet. => TODO: Add a screenshot / gif to visualize the click on the property. 
+20. On the right side of the Test Recorder window you find a section with Properties and Bindings. Click on the icon that is located on the left of the property *enabled*. This will `expect(enabled).toBeTruthy();` to the code snippet. => TODO: Add a screenshot / gif to visualize the click on the property. - Georg, Laura
 
 21. Copy the generated code snippet from the Test Recorder into the `module.exports` section in your `newBook.page.js` and name the function `iSeeEditButton`. - TODO(Georg,Simon): Update and Remove the next step
 
-    Assign the generated snippet to the constant `const editButton =`. => TODO: Remove
-
-21b. Below, add an expect statement: TODO: Replace with Test Recorder behaviour
-
-    ```JavaScript
-    expect(editButton.isPresent()).toBeTruthy(); - TODO: Remove
-    ```
-
     Your page object should now look as follows:
 
-    ![Page object after adding the code snippet from the test recorder](EditButtonAssertionPO.png) - TODO: Update
+    ![Page object after adding the code snippet from the test recorder](EditButtonAssertionPO.png) - TODO: Update image
 
 22. In the bookshop application, right-click the **<** *(back)* button and choose **Press**.
 
@@ -454,30 +449,22 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     ![Complete test in newBook.page.js](TechedspecFile.png) - TODO: Update image
 
-27. In the list of books of your bookshop application, right-click the title of the book you've created and choose **Highlight**.
+27. In the list of books of your bookshop application, right-click the title of the book you've created and choose **Highlight**. Make sure that only the specific Title of the row is blue highlighted and not the whole row.
 
-    ![Complete test in newBook.page.js](ClickBookLabel-HighlightEvent.gif) => TODO: Update image + Add expect
+    ![Complete test in newBook.page.js](ClickBookLabel-HighlightEvent.gif) => TODO: Update image
 
-28. On the right side of the Test Recorder window you find a section with Properties and Bindings. Click on the icon that is located on the left of the property *visible* in the *Inherited* section. This will `expect(visible).toBeTruthy();` to the code snippet. => TODO: Add a screenshot / gif to visualize the click on the property. => TODO(Georg,Simon): Shall we use that as assertion
+28. On the right side of the Test Recorder window you find a section with Properties and Bindings. Click on the icon that is located on the left of the property *visible* in the *Inherited* section. This will add `expect(visible).toBeTruthy();` to the code snippet. => TODO: Add a screenshot / gif to visualize the click on the property. => TODO(Georg,Simon): Shall we use that as assertion
 
 29. Copy the generated code snippet into the `module.exports` section of your `manageBooks.page.js` and name the function `theBookListContains`.
 
-    Assign the generated snippet to `const book =`. => TODO: Remove
+    Your page object should now look as follows:
 
-29b. Below, add an expect statement: => TODO: Remove
-
-    ```JavaScript
-    expect(book.isPresent()).toBeTruthy(); - TODO: Remove
-    ```
-
-30. In the `theBookListContains`, replace the `bindingPath` with the `text` property, so that your code looks as follows:
-
-    ![Replacing the bindingPath with text property](VSCodeSnippet-asertion.png) - TODO: Update
+    ![Page object after adding the code snippet from the test recorder](NewBookisInList.png) - TODO: Update image
 
 
-32. In Visual Studio Code, choose **Terminal** **→** **New Terminal**.
+30. In Visual Studio Code, choose **Terminal** **→** **New Terminal**.
 
-33. To run your test, execute the following command:
+31. To run your test, execute the following command:
 
     ```Bash/Shell
     npm run wdi5
@@ -487,9 +474,9 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     ![Terminal output after successful test](TerminalOutput.png) - TODO: Update image
 
-34. In the **EXPLORER** pane, right-click the `timeline-report.html` in the `target` folder and choose **Reveal in File Explorer**.
+32. In the **EXPLORER** pane, right-click the `timeline-report.html` in the `target` folder and choose **Reveal in File Explorer**.
 
-35. Double-click the `timeline-report` in the file explorer: - TODO: Update
+33. Double-click the `timeline-report` in the file explorer: - TODO: Update
 
     ![timeline-report.html in the file explorer](ReportHtml.png) - TODO: Update image
 
