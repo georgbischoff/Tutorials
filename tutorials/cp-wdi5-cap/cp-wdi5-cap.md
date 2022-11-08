@@ -49,7 +49,7 @@ The following graphic shows the positioning of system tests with wdi5 compared t
 
 >For more information about testing with wdi5, have a look at these blogs and presentations:
 
->- [the king is dead – long live the king: wdi5 as UIVeri5 successor](https://blogs.sap.com/2022/02/12/the-king-is-dead-long-live-the-king-wdi5-as-uiveri5-successor/)
+- [the king is dead – long live the king: wdi5 as UIVeri5 successor](https://blogs.sap.com/2022/02/12/the-king-is-dead-long-live-the-king-wdi5-as-uiveri5-successor/)
 - [the ecosystem evolving around wdi5](https://blogs.sap.com/2022/08/30/the-ecosystem-evolving-around-wdi5/)
 - [Testing UI5 Apps with wdi5 - Zero to Hero to Continuous Integration](https://www.youtube.com/watch?v=f-0ztSnb2-c)
 
@@ -111,13 +111,9 @@ In Visual Studio Code, set up and run your bookshop application.
 
     ![Terminal response for the 'npm run fiori' command](cap_output.png) => TODO Update image
 
-9. In Visual Studio Code, choose **Terminal** **→** **New Terminal**, to start a second terminal window.
+9. Open a new Terminal, for that choose **Terminal** **→** **New Terminal**
 
-10.. Generate the `wdio.conf.js` file by using the guided installation of WebdriverIO.
-
-TODO: Quick install wdi5 https://ui5-community.github.io/wdi5/#/installation?id=a-quickstart-with-npm-init-wdi5 => Simon
-
-11. Use the command `npm init wdio ./fiori/app/admin-books/webapp/test/wdi5/` to call the wdio generator answer the questions as follows:
+10. Use the command `npm init wdio ./fiori/app/admin-books/webapp/test/wdi5/` to call the guided installation of WebdriverIO. Answer the questions as follows:
     | Question | Answer |
     | ----------- | ----------- |
     | Where is my automation backend located? | On my local machine |
@@ -130,10 +126,10 @@ TODO: Quick install wdi5 https://ui5-community.github.io/wdi5/#/installation?id=
     | Do you want to add a service to your test setup? | chromedriver, ui5 (select them via SPACE) |
     | What is the base url? | http://localhost:4004 |
     | Do you want me to run npm install | Y or yes |
+    
+11. In your project in the **EXPLORER** pane, choose **`fiori`** **→** **`app`** **→** **`admin-books`** **→** **`webapp`** **→** **`test`** **→** **`wdi5`**.
 
-12. In your project in the **EXPLORER** pane, choose **`fiori`** **→** **`app`** **→** **`admin-books`** **→** **`webapp`** **→** **`test`** **→** **`wdi5`**.
-
-    Here, you can see the files through which you can define system tests with wdi5:
+12. Now you can see all the files through which you can define system tests with wdi5:
 
     ![Resources of the wdi5 folder in the explorer pane](UIVeri5FolderStructure.png) - TODO: Update image
 
@@ -167,7 +163,7 @@ TODO: Quick install wdi5 https://ui5-community.github.io/wdi5/#/installation?id=
     },
     ```
 
-13. Add following snippets to configure the timeline reporter correctly in the `wdio.conf.js`:
+14. Add following snippets to configure the timeline reporter correctly in the `wdio.conf.js`:
 
     ```JavaScript
     const { TimelineService } = require("wdio-timeline-reporter/timeline-service");
@@ -195,12 +191,12 @@ TODO: Quick install wdi5 https://ui5-community.github.io/wdi5/#/installation?id=
     // ...
     ```
 
-14. Now, your project setup is ready. Make sure that your code looks as follows and choose **File** **→** **Save**.
+15. Now, your project setup is ready. Make sure that your code looks as follows and choose **File** **→** **Save**.
 
     ![wdio.conf.js after finishing the project setup](confjs.png) - TODO: Update image Simon
 
 
-[VALIDATE_6]
+[VALIDATE_6]x
 [ACCORDION-END]
 
 [ACCORDION-BEGIN [Step 2: ](Walk through the test scenario)]
@@ -461,13 +457,12 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     ![Page object after adding the code snippet from the test recorder](NewBookisInList.png) - TODO: Update image
 
-
-30. In Visual Studio Code, choose **Terminal** **→** **New Terminal**.
+30. Right-click your *test\wdi5* folder in the **EXPLORER** pane and choose **Open in Integrated Terminal**.
 
 31. To run your test, execute the following command:
 
     ```Bash/Shell
-    npm run wdi5
+    npm run wdio
     ```
 
     If your test run was successful, your terminal response should look as follows:
