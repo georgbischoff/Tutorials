@@ -6,7 +6,7 @@ time: 60
 tags: [ tutorial>beginner, topic>cloud, topic>user-interface, products>sap-business-technology-platform]
 primary_tag: software-product-function>sap-cloud-application-programming-model
 ---
- 
+
 ## Prerequisites
 - You use [SAPUI5](https://sapui5.hana.ondemand.com/) in version 1.105.0 or higher.
 - You have installed and configured a local Git client.
@@ -117,13 +117,13 @@ In Visual Studio Code, set up and run your bookshop application.
 
 TODO: Quick install wdi5 https://ui5-community.github.io/wdi5/#/installation?id=a-quickstart-with-npm-init-wdi5 => Simon
 
-11. Use the command `npm init wdio .` to call the wdio generator answer the questions as follows:
+11. Use the command `npm init wdio ./fiori/app/admin-books/webapp/test/wdi5/` to call the wdio generator answer the questions as follows:
     | Question | Answer |
     | ----------- | ----------- |
     | Where is my automation backend located? | On my local machine |
     | Which framework do you want to use? | mocha |
     | Do you want to use a compiler? | No! |
-    | Where are your test specs located? | ./**/wdi5/specs/*.js |
+    | Where are your test specs located? | ./specs/*.js |
     | Do you want WebdriverIO to autogenerate some test files? | N or no |
     | Which reporter do you want to use? | spec, timeline (select them via SPACE) |
     | Do you want to add a plugin to your test setup? | No Plugin (ENTER) |
@@ -158,7 +158,7 @@ TODO: Quick install wdi5 https://ui5-community.github.io/wdi5/#/installation?id=
          Page objects use locators to identify specific elements on the screen. Thereby, they allow test runners to see and do anything a real user would. Page objects reside in the `pageobjects` folder of your project.
 
 
-13. Open the created `wdio.conf.js` file and add the following snippet under `exports.config` to configure wdi5 correctly: - TODO: Remove?
+13. Open the created `wdio.conf.js` file and add the following snippet under `exports.config` to configure wdi5 correctly:
 
     ```JavaScript
     wdi5: {
@@ -259,7 +259,7 @@ Create a wdi5 script to test the creation of a new book in your bookshop applica
 
     ```JavaScript
     it("create a new book", async () => {
-    
+
     });
     ```
 
@@ -423,7 +423,7 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     ```JavaScript
     it("should check book is added", async () => {
-   
+
     });
     ```
 
