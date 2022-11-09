@@ -18,12 +18,13 @@ primary_tag: software-product-function>sap-cloud-application-programming-model
     ```
     If you encounter any problems when installing the `cds` development kit, have a look at [this troubleshooting section](https://cap.cloud.sap/docs/advanced/troubleshooting#npm-installation).
 - Your Google Chrome version is up to date. See [Update Google Chrome](https://support.google.com/chrome/answer/95414?co=GENIE.Platform%3DDesktop&hl=en).
+- You have an [SAP Business Technology Platform (BTP) Trial Account](https://developers.sap.com/tutorials/hcp-create-trial-account.html).
+- You have an account on [GitHub](https://github.com/).
 
 ## Details
 ### You will learn
 - How to create system tests with wdi5 using the UI5 Test Recorder for CAP-based projects on SAP Business Technology Platform
-- How to create a CI/CD pipeline with project "Piper" (Q3/2022) - TODO: Group Page
-- How to add system tests as automated steps to your CI/CD pipeline (Q3/2022) - TODO: Group Page
+- How to create a CI/CD pipeline and add system tests as automated steps to your CI/CD pipeline
 
 ### What Is This Tutorial About?
 
@@ -37,7 +38,7 @@ The tutorial consists of three main stages:
 
 2. Create and run system tests with wdi5 that add a new book to your bookshop and check if it's displayed in the list.
 
-3. Automate your system tests by integrating them into a CI/CD pipeline. (Q3/2022) - TODO(Laura): Group Page
+3. Automate your system tests by integrating them into a CI/CD pipeline. 
 
 ### About System Tests with wdi5
 
@@ -45,7 +46,7 @@ The tutorial consists of three main stages:
 
 The following graphic shows the positioning of system tests with wdi5 compared to other testing methods and tools. The arrow shape illustrates the granularity of the methods: Compared to unit, component, or integration tests, system tests examine less details and focus on crucial workflows, instead.
 
-![Comparison of different testing methods](test-comparison.png) TODO(Laura): Update images
+![Comparison of different testing methods](test_comparison_wdi5.png)
 
 >For more information about testing with wdi5, have a look at these blogs and presentations:
 
@@ -59,17 +60,12 @@ The SAPUI5 Test Recorder is a tool that helps you create integration and system 
 
 > For more information about the SAPUI5 Test Recorder, see [Test Recorder](https://sapui5.hana.ondemand.com/#/topic/2535ef9272064cb6bd6b44e5402d531d).
 
-### About CI/CD with Project "Piper" (Q3/2022) => TODO(Laura)
+### About SAP Continuous Integration and Delivery 
 
-Project "Piper" is one of SAP's solutions for continuous integration and delivery. It provides pre-configured Jenkins pipelines, which you can use in your own Jenkins master infrastructure and adapt according your needs. Project "Piper" consists of two different parts:
+SAP Continuous Integration and Delivery is a service on SAP Business Technology Platform, which lets you configure and run predefined continuous integration and delivery pipelines that build, test, and deploy your code changes.
+It provides an easy, UI-guided way to set up the service and configure and run your pipelines, without hosting your own Jenkins instance. See [What Is SAP Continuous Integration and Delivery?](https://help.sap.com/docs/CONTINUOUS_DELIVERY/99c72101f7ee40d0b2deb4df72ba1ad3/618ca03fdca24e56924cc87cfbb7673a.html?version=Cloud).
 
-- A [shared library](https://sap.github.io/jenkins-library/), which contains the description of steps, scenarios, and utilities that are required to use Jenkins pipelines
-- A [set of Docker images](https://github.com/SAP/devops-docker-images) that can be used to implement best practice processes
-
-> For more information about SAP solutions for CI/CD, see:
-
-> - [Continuous Integration and Delivery by SAP](https://help.sap.com/viewer/product/CICD_OVERVIEW/Cloud/en-US?task=discover_task)
-> - [SAP Solutions for Continuous Integration and Delivery](https://help.sap.com/viewer/8cacec64ed854b2a88e9a0973e0f97a2/Cloud/en-US/e9fa320181124fa9808d4446a1bf69dd.html)
+> For more information about SAP solutions for CI/CD, see [SAP Solutions for Continuous Integration and Delivery](https://help.sap.com/docs/CICD_OVERVIEW/8cacec64ed854b2a88e9a0973e0f97a2/e9fa320181124fa9808d4446a1bf69dd.html?language=en-US) and [Continuous Integration and Delivery by SAP](https://help.sap.com/docs/CICD_OVERVIEW).
 
 ---
 
@@ -77,7 +73,7 @@ Project "Piper" is one of SAP's solutions for continuous integration and deliver
 
 In Visual Studio Code, set up and run your bookshop application.
 
-1. Before you start working, fork the [Repository](https://github.com/SAP-samples/cap-bookshop-wdi5) to your personal github account. Here you find documentation on how to [fork GitHub repositories](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository).
+1. Before you start working, fork [this repository](https://github.com/SAP-samples/cap-bookshop-wdi5) to your personal github account. Here you find documentation on how to [fork GitHub repositories](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository).
 2. In Visual Studio Code, choose **View** **→** **Command Palette…** **→** **Git:Clone**.
 3. As **Repository URL**, enter:
     ```URL
@@ -201,7 +197,7 @@ In Visual Studio Code, set up and run your bookshop application.
 
 [ACCORDION-BEGIN [Step 2: ](Walk through the test scenario)]
 
-Manually, familiarize yourself with your test scenario before starting to code it. Later, you'll automate the following steps so that they are automatically executed during your system tests.
+Familiarize yourself with your test scenario before starting to code it. Later, you'll automate the following steps so that they are automatically executed during your system tests.
 
 1. As your bookshop application runs on your local server, use the following URL to access the bookshop it:
 
@@ -223,6 +219,8 @@ Manually, familiarize yourself with your test scenario before starting to code i
 
 6. Choose **Create**.
 
+    !![Title of the new book](EnterTitle.gif)
+
 7. Verify that the **Edit** button is displayed:
 
     !![Edit button in bookshop app](editButton.png)
@@ -231,6 +229,7 @@ Manually, familiarize yourself with your test scenario before starting to code i
 
 9. Verify that the new book has been added to the list.
 
+    !![New book in the list](NewBook.png)
 
 [DONE]
 [ACCORDION-END]
@@ -251,7 +250,7 @@ Create a wdi5 script to test the creation of a new book in your bookshop applica
 
     In your `bookshop.test.js` file, you'll define the steps of your test scenario and within them, refer to your page objects.
 
-2. Implement the `it` function by adding the skeleton of the *create new book* test:
+2. Into the `describe` funcion, implement the `it` function by adding the skeleton of the *create new book* test:
 
     ```JavaScript
     it("create a new book", async () => {
@@ -261,7 +260,7 @@ Create a wdi5 script to test the creation of a new book in your bookshop applica
 
     Your code should now look as follows:
 
-    ![bookshop.test.js with create new book test](techedSpec.png) - TODO: Update image
+    ![bookshop.test.js with create new book test](techedSpec.png)
 
 3. As a first step to create a new book, you have to choose the **Create** button. Implement this action as follows in the *it* block:
 
@@ -273,7 +272,7 @@ Create a wdi5 script to test the creation of a new book in your bookshop applica
 
     Your code should now look as follows:
 
-    ![Action to choose the create button](iClickCreateButtonAction.png) - TODO: Update
+    ![Action to choose the create button](iClickCreateButtonAction.png)
 
     After each step make sure to save changes by choosing **File** **→** **Save**.
 
@@ -289,17 +288,17 @@ Create a wdi5 script to test the creation of a new book in your bookshop applica
 
     As a result, the Test Recorder highlights the entry to indicate its activity:
 
-    !![Test recorder highlights the create button](CreateButtonPress.gif) => TODO Update image
+    !![Test recorder highlights the create button](CreateButtonPress.gif) 
 
     Now, the Test Recorder provides a code snippet for your test:
 
-    !![Test recorder provides code snippet for wdi5 test](SelectDialectUIVeri5.gif) - TODO: Update with selection of wdi5 as dialect
+    !![Test recorder provides code snippet for wdi5 test](SelectDialectUIVeri5.gif) 
 
     Please make sure that the dialect *wdi5* is selected.
 
 7. Copy the generated code snippet into the `module.exports` section of your `manageBooks.page.js` and name the function `iClickOnCreateNewBook`.
 
-    ![Clicking the create button action in the manageBooks page object](ClickCreateButtonLogic.png) - TODO: update image
+    ![Clicking the create button action in the manageBooks page object](ClickCreateButtonLogic.png) 
 
 [DONE]
 [ACCORDION-END]
@@ -316,7 +315,7 @@ Create a wdi5 script to test the addition of detailed information to your newly 
     const bookTitle = "How to Cook Pancakes";
     ```
 
-2. When adding detailed information to a book in the bookshop application, as a first action, you have to enter the title of the book. Implement this action as follows in the *it* block:
+3. When adding detailed information to a book in the bookshop application, as a first action, you have to enter the title of the book. Implement this action as follows in the *it* block:
 
     ``` JavaScript
     await NewBookPage.iEnterTitle(bookTitle);
@@ -334,11 +333,11 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     As a result, the Test Recorder highlights the input field to indicate its activity:
 
-    !![teched.spec.js with enter title action](EnterTitle.gif) => Update image
+    !![teched.spec.js with enter title action](EnterTitle2.gif) 
 
     Now, the Test Recorder provides a code snippet for your test:
 
-    !![The test recorder provides a code snippet for the enter title action](EnterBookTitle.png) - TODO: Update image
+    !![The test recorder provides a code snippet for the enter title action](wdi5_EnterBookTitle.png) 
 
     Please make sure that the dialect *wdi5* is selected.
 
@@ -346,26 +345,30 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     Here, pass the `sTitle` as an argument in the function name and use it in the `enterText()` method.
 
-    ![Code snippet for enter title action in newBook page object](EnterTitleSnippet.png) - TODO: Update image
+    ![Code snippet for enter title action in newBook page object](EnterTitleSnippet.png)
 
-7. In the *it* block of your `bookshop.spec.js`, add the following line to choose a value from the **Genre** drop-down list:
+7. In the *it* block of your `bookshop.test.js`, add the following line to choose a value from the **Genre** drop-down list:
 
     ``` JavaScript
     await NewBookPage.iSelectGenre();
     ```
+    ![Code snippet for select genre action in bookshop.test.js file](SelectGenreSpec.png)   
+
 8. In your bookshop application, right-click the **Genre** drop-down menu and choose **Press**.
 
     As a result, the Test Recorder highlights the drop-down icon to indicate its activity:
 
-    !![Highlighted genre drop-down menu](ClickGenreDropDown.gif) => Update image
+    !![Highlighted genre drop-down menu](ClickGenreDropDown.gif)
 
     Now, the Test Recorder provides a code snippet for your test:
 
-    !![The test recorder provides a code snippet for the genre drop-down menu](GenreDropDownSnippet.png) - TODO: Update image
+    !![The test recorder provides a code snippet for the genre drop-down menu](GenreDropDownSnippet.png) 
 
     Please make sure that the dialect *wdi5* is selected.
 
 9. Copy this code snippet into the `module.exports` section of your `newBook.page.js` and name the function `iSelectGenre`.
+
+    !![Code snippet for select genre action in newBook page object](GenreSpecs.png)
 
 10. From the **Genre** pop-up window in your bookshop application, right-click **Fiction** and choose **Press**.
 
