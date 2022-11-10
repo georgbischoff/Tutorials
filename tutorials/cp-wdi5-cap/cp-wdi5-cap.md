@@ -85,7 +85,7 @@ In Visual Studio Code, set up and run your bookshop application.
 
     As a result, the project `CAP-BOOKSHOP-WDI5` is loaded into the **EXPLORER** pane and you can see its resources in the outline:
 
-    ![Resources of the project in the explorer pane](FolderStructure.png) => TODO update image
+    ![Resources of the project in the explorer pane](FolderStructure.png) 
 
 6. In Visual Studio Code, choose **Terminal** **→** **New Terminal**.
 
@@ -103,10 +103,6 @@ In Visual Studio Code, set up and run your bookshop application.
     npm run fiori
     ```
 
-    The console output should look as follows:
-
-    ![Terminal response for the 'npm run fiori' command](cap_output.png) => TODO Update image
-
 9. Open a new Terminal, for that choose **Terminal** **→** **New Terminal**
 
 10. Use the command `npm init wdio ./fiori/app/admin-books/webapp/test/wdi5/` to call the guided installation of WebdriverIO. Answer the questions as follows:
@@ -122,12 +118,16 @@ In Visual Studio Code, set up and run your bookshop application.
     | Do you want to add a service to your test setup? | chromedriver, ui5 (select them via SPACE) |
     | What is the base url? | http://localhost:4004 |
     | Do you want me to run npm install | Y or yes |
+
+    The console output should look as follows:
+
+    ![Terminal response for the 'npm init wdio' command](wdi5_init.png)  
     
 11. In your project in the **EXPLORER** pane, choose **`fiori`** **→** **`app`** **→** **`admin-books`** **→** **`webapp`** **→** **`test`** **→** **`wdi5`**.
 
 12. Now you can see all the files through which you can define system tests with wdi5:
 
-    ![Resources of the wdi5 folder in the explorer pane](UIVeri5FolderStructure.png) - TODO: Update image
+    ![Resources of the wdi5 folder in the explorer pane](wdi5FolderStructure.png)
 
     >The `target\report` folder is created with the first test execution.
 
@@ -211,25 +211,21 @@ Familiarize yourself with your test scenario before starting to code it. Later, 
 
 3. Enter the title of your new book, for example, *How to Cook Pancakes*:
 
-    !![Title of the new book](EnterTitle.png) => TODO Update image
-
 4. From the **Genre** drop-down menu, choose **Fiction**.
 
 5. From the **Author** drop-down menu, choose **Emile Bronte**.
 
+    ![Title of the new book](EnterTitle.gif)
+
 6. Choose **Create**.
 
-    !![Title of the new book](EnterTitle.gif)
-
-7. Verify that the **Edit** button is displayed:
-
-    !![Edit button in bookshop app](editButton.png)
+7. Verify that the **Edit** button is displayed.
 
 8. Choose **Back** to return to the list of books.
 
 9. Verify that the new book has been added to the list.
 
-    !![New book in the list](NewBook.png)
+    ![New book in the list](NewBook.png)
 
 [DONE]
 [ACCORDION-END]
@@ -288,11 +284,11 @@ Create a wdi5 script to test the creation of a new book in your bookshop applica
 
     As a result, the Test Recorder highlights the entry to indicate its activity:
 
-    !![Test recorder highlights the create button](CreateButtonPress.gif) 
+    ![Test recorder highlights the create button](CreateButtonPress.gif) 
 
     Now, the Test Recorder provides a code snippet for your test:
 
-    !![Test recorder provides code snippet for wdi5 test](SelectDialectUIVeri5.gif) 
+    ![Test recorder provides code snippet for wdi5 test](SelectDialectwdi5.gif) 
 
     Please make sure that the dialect *wdi5* is selected.
 
@@ -325,7 +321,7 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     Now, your code should look as follows:
 
-    ![booksho.test.js with enter title action](EnterTitleSpec.png) - TODO: Update Image
+    ![booksho.test.js with enter title action](EnterTitleSpec.png)
 
 4. From the **EXPLORER** pane, open `pageobjects` **→** `newBook.page.js`.
 
@@ -333,11 +329,11 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     As a result, the Test Recorder highlights the input field to indicate its activity:
 
-    !![teched.spec.js with enter title action](EnterTitle2.gif) 
+    ![teched.spec.js with enter title action](EnterTitle2.gif) 
 
     Now, the Test Recorder provides a code snippet for your test:
 
-    !![The test recorder provides a code snippet for the enter title action](wdi5_EnterBookTitle.png) 
+    ![The test recorder provides a code snippet for the enter title action](wdi5_EnterBookTitle.png) 
 
     Please make sure that the dialect *wdi5* is selected.
 
@@ -358,11 +354,11 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     As a result, the Test Recorder highlights the drop-down icon to indicate its activity:
 
-    !![Highlighted genre drop-down menu](ClickGenreDropDown.gif)
+    ![Highlighted genre drop-down menu](ClickGenreDropDown.gif)
 
     Now, the Test Recorder provides a code snippet for your test:
 
-    !![The test recorder provides a code snippet for the genre drop-down menu](GenreDropDownSnippet.png) 
+    ![The test recorder provides a code snippet for the genre drop-down menu](GenreDropDownSnippet.png) 
 
     Please make sure that the dialect *wdi5* is selected.
 
@@ -374,51 +370,49 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
 11. Again, the Test Recorder provides a code snippet for your test. Copy it into the `module.exports` section of your `newBook.page.js` under the same function name (`iSelectGenre`).
 
-12. In the **Genre** pop-up window in your bookshop application, right-click **OK** and choose **Press**.
-
-13. Again, copy the generated code snippet from the Test Recorder into the `module.exports` section of your `newBook.page.js` under the same function name (`iSelectGenre`).
-
     Your code should now look as follows:
 
-    ![Final code in newBook.page.js after adding the steps from the genre drop-down and pop-up](SelectGenerVSCode.png) - TODO: Update image
+    ![Final code in newBook.page.js after adding the steps from the genre drop-down and pop-up](SelectGenerVSCode.png)
 
-14. In the *it* block of your `bookshop.test.js`, add the following line to choose a value from the **Author** drop-down list:
+12. In the *it* block of your `bookshop.test.js`, add the following line to choose a value from the **Author** drop-down list:
 
     ```JavaScript
     await NewBookPage.iSelectAuthor();
     ```
 
-15. Repeat the procedure for selecting the author (that is, copying the generated code snippets from the Test Recorder for choosing the drop-down menu, **Emily Bronte** from the pop-up window, and the **OK** button in the pop-up window into your page object).
+13. Repeat the procedure for selecting the author (that is, copying the generated code snippets from the Test Recorder for choosing the drop-down menu and **Emily Bronte** from the pop-up window into your page object). Name the funcions `iSelectAuthor`.
 
     In the end, the code in your `newBook.page.js` should look as follows:
 
-    ![newBook.page.js after adding the steps from choosing the author](CodeSnippetChooseAuthor.png) - TODO: Update image
+    ![newBook.page.js after adding the steps from choosing the author](CodeSnippetChooseAuthor.png)
 
-16. Now, in the overview window of your newly created book in the bookshop application, right-click the **Create** button and choose **Press**.
+14. Now, in the overview window of your newly created book in the bookshop application, right-click the **Create** button and choose **Press**.
 
-17. Copy the generated snippet into the `module.exports` section of your `newBook.page.js`:
+15. Copy the generated snippet into the `module.exports` section of your `newBook.page.js`. Name the funcions `iPressCreate` and add the expected behavior to your `bookshop.test.js`.
 
-    ![newBook.page.js after adding the code snippet for pressing the save button](ClickSaveBtnSnippet.png) - TODO: Update image
+    ![newBook.page.js after adding the code snippet for pressing the Create button](ClickSaveBtnSnippet.png) 
 
-18. To ensure that the save action was successful, verify that the **Edit** button is displayed. Add the expected behavior to your `bookshop.test.js`:
+16. To ensure that the save action was successful, verify that the **Edit** button is displayed. Add the expected behavior to your `bookshop.test.js`:
 
-    ![bookshop.test.js after adding the code snippet for verifying that the edit button is displayed](EditButtonAssertion.png) - TODO: Update image
+    ![bookshop.test.js after adding the code snippet for verifying that the edit button is displayed](EditButtonAssertion1.png) 
 
-19. In the bookshop application, right-click the **Edit** button and choose **Highlight**.
+17. In the bookshop application, right-click the **Edit** button and choose **Highlight**.
 
-20. On the right side of the Test Recorder window you find a section with Properties and Bindings. Click on the icon that is located on the left of the property *enabled*. This will `expect(enabled).toBeTruthy();` to the code snippet. => TODO: Add a screenshot / gif to visualize the click on the property. - Georg, Laura
+18. On the right side of the Test Recorder window you find a section with Properties and Bindings. Choose the icon that is located on the left of the property *enabled*. This will `expect(enabled).toBeTruthy();` to the code snippet.
 
-21. Copy the generated code snippet from the Test Recorder into the `module.exports` section in your `newBook.page.js` and name the function `iSeeEditButton`. - TODO(Georg,Simon): Update and Remove the next step
+    ![Code snipped with property "enabled"](EnabledButton.gif) 
 
-    Your page object should now look as follows:
+19. Copy the generated code snippet from the Test Recorder into the `module.exports` section in your `newBook.page.js` and name the function `iSeeEditButton`. - TODO(Georg,Simon): Update and Remove the next step
 
-    ![Page object after adding the code snippet from the test recorder](EditButtonAssertionPO.png) - TODO: Update image
+    It should look as follows:
 
-22. In the bookshop application, right-click the **<** *(back)* button and choose **Press**.
+    ![Page object after adding the code snippet from the test recorder](EditButtonAssertionPO.png)
 
-    ![Test recorder highlights the navigate back button](BackButton-PressEvent.gif) => Update image
+20. In the bookshop application, right-click the **<** *(Go Back)* button and choose **Press**.
 
-23. Implement the `it` function by adding the skeleton of the *should check book is added* test:
+    ![Test recorder highlights the navigate back button](BackButton-PressEvent.gif)
+
+21. In the `bookshop.test.js` file, implement the `it` function by adding the skeleton of the *should check book is added* test:
 
     ```JavaScript
     it("should check book is added", async () => {
@@ -426,19 +420,17 @@ Create a wdi5 script to test the addition of detailed information to your newly 
     });
     ```
 
-24. Again, copy the generated code snippet into the `module.exports` section of your `newBook.page.js` as action `iNavigateBack`.
+22. Again, copy the generated code snippet into the `module.exports` section of your `newBook.page.js` and name it `iNavigateBack`.
 
     Your page object should now look as follows:
 
-    ![Page object with action for pressing the back button](BackButtonVSCode.png) - TODO: Update image
+    ![Page object with action for pressing the back button](BackButtonVSCode.png)
 
-25. In your bookshop application, choose the **<** *(back)* button.
+23. In your bookshop application, choose the **<** *(back)* button.
 
-    As a result, you should see the list of all books, including the one you've added:
+    As a result, you should see the list of all books, including the one you've added.
 
-    ![List of books including the new book](ListOfBooks.png) => TODO: Update image
-
-26. In your `newBook.page.js`, add this fact as an expected behavior:
+24. In your `newBook.page.js`, add this fact as an expected behavior:
 
     ```JavaScript
     await ManageBooksPage.theBookListContains(bookTitle);
@@ -446,23 +438,25 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     Now, your test is complete. Make sure that it looks as follows:
 
-    ![Complete test in newBook.page.js](TechedspecFile.png) - TODO: Update image
+    ![Complete test in newBook.page.js](TechedspecFile.png)
 
-27. In the list of books of your bookshop application, right-click the title of the book you've created and choose **Highlight**. Make sure that only the specific Title of the row is blue highlighted and not the whole row.
+25. In the list of books of your bookshop application, right-click the title of the book you've created and choose **Highlight**. Make sure that only the specific Title of the row is blue highlighted and not the whole row.
 
-    ![Complete test in newBook.page.js](ClickBookLabel-HighlightEvent.gif) => TODO: Update image
+26. On the right side of the Test Recorder window you find a section with Properties and Bindings. Choose the icon that is located on the left of the property *visible* in the *Inherited* section. This will add `expect(visible).toBeTruthy();` to the code snippet. => TODO(Georg,Simon): Shall we use that as assertion
 
-28. On the right side of the Test Recorder window you find a section with Properties and Bindings. Click on the icon that is located on the left of the property *visible* in the *Inherited* section. This will add `expect(visible).toBeTruthy();` to the code snippet. => TODO: Add a screenshot / gif to visualize the click on the property. => TODO(Georg,Simon): Shall we use that as assertion
+    ![Test recorder highlights the book entry](Title-HighlightEvent.gif) 
 
-29. Copy the generated code snippet into the `module.exports` section of your `manageBooks.page.js` and name the function `theBookListContains`.
+27. Copy the generated code snippet into the `module.exports` section of your `manageBooks.page.js` and name the function `theBookListContains`.
 
-    Your page object should now look as follows:
+    It look as follows:
 
-    ![Page object after adding the code snippet from the test recorder](NewBookisInList.png) - TODO: Update image
+    ![Page object after adding the code snippet from the test recorder](NewBookisInList.png) 
 
-30. Right-click your *test\wdi5* folder in the **EXPLORER** pane and choose **Open in Integrated Terminal**.
+Choose **File** **→** **Save**.    
 
-31. To run your test, execute the following command:
+28. Right-click your *test\wdi5* folder in the **EXPLORER** pane and choose **Open in Integrated Terminal**.
+
+29. To run your test, execute the following command:
 
     ```Bash/Shell
     npm run wdio
@@ -472,9 +466,9 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     ![Terminal output after successful test](TerminalOutput.png) - TODO: Update image
 
-32. In the **EXPLORER** pane, right-click the `timeline-report.html` in the `target` folder and choose **Reveal in File Explorer**.
+30. In the **EXPLORER** pane, right-click the `timeline-report.html` in the `target` folder and choose **Reveal in File Explorer**.
 
-33. Double-click the `timeline-report` in the file explorer: - TODO: Update
+31. Double-click the `timeline-report` in the file explorer: - TODO: Update
 
     ![timeline-report.html in the file explorer](ReportHtml.png) - TODO: Update image
 
