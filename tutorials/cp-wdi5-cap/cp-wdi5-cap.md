@@ -77,7 +77,7 @@ In Visual Studio Code, set up and run your bookshop application.
 2. In Visual Studio Code, choose **View** **→** **Command Palette…** **→** **Git:Clone**.
 3. As **Repository URL**, enter:
     ```URL
-    https://github.com/<your github username>/SAP-samples/cap-bookshop-wdi5.git
+    https://github.com/<your github username>/cap-bookshop-wdi5.git
     ```
 4. Choose **Select Repository Location** and select a folder into which to clone the test repository.
 
@@ -465,6 +465,43 @@ Choose **File** **→** **Save**.
     If your test run was successful, your terminal response should look as follows:
 
     ![Terminal output after successful test](TerminalOutput.png) - TODO: Update image
+
+    Remarks: 
+    1. In case you are facing timeout error as shown below:
+
+    ![error snippet from console for step timeout](cucumbertimeout.png)
+     
+      The timeout property is applicable at each step definition. However, if you want to increase the timeout because your test takes longer than the default value, then you need to set it in the mocha framework options. In the wdio.conf.js set the time as shown below:
+    
+    ``` JavaScript
+    // wdio.conf.js
+    exports.config = {
+        //.....
+        mochaOpts: {
+            ui: 'bdd',
+            timeout: 60000
+        }
+        //.....
+    }
+    ```
+
+    2. Another known timeout error is while waiting for the ui5 controller to wait as shown below:
+
+    ![error snippet from console for ui5timeout](waitforui5error.png) 
+
+      If you are getting timeout errors while waiting for an UI5 element to load or be visible, then consider increasing the maximum waiting time for the availability of UI5 control. In the wdio.conf.js set the time as shown below:
+
+    ``` JavaScript
+    /// wdio.conf.js
+    exports.config = {
+        //.....
+        wdi5: {
+            url: "fiori-apps.html#Books-manage",
+            waitForUI5Timeout: 60000,
+        },
+        //.....
+    }
+    ```
 
 30. In the **EXPLORER** pane, right-click the `timeline-report.html` in the `target` folder and choose **Reveal in File Explorer**.
 
