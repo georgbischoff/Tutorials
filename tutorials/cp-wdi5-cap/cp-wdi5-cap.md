@@ -129,7 +129,7 @@ In Visual Studio Code, set up and run your bookshop application.
 
     ![Resources of the wdi5 folder in the explorer pane](wdi5FolderStructure.png)
 
-    >The `target\report` folder is created with the first test execution.
+    >The `test\wdi5` folder is created with the first test execution.
 
 
     - (a) The `wdio.conf.js` file:
