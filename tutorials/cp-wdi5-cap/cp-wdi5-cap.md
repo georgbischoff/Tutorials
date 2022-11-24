@@ -555,15 +555,18 @@ Connect SAP Continuous Integration and Delivery with the repository in which you
 
 4. Paste it into the **Clone URL** field in the **Add Repository** pop-up in SAP Continuous Integration and Delivery. 
 
-5. Enter the **Name** for your repository and leave the rest of the fields as they are.
+5. Choose **Add**.
 
-6. Choose **Add**.
+    >(Optional) You can automate CI/CD builds using GitHub webhooks. You can trigger a build by creating and commiting a code change in your GitHub project. For more information, see [Add a Webhook in GitHub](https://help.sap.com/docs/CONTINUOUS_DELIVERY/99c72101f7ee40d0b2deb4df72ba1ad3/090d4aaa9628426b91c90e8284213040.html).
+
  
 [ACCORDION-BEGIN [Step 7: ](Configure your SAP BTP credentials)]
 
 Create credentials for deploying your application to SAP BTP, Cloud Foundry environment.
 
 1. In SAP Continuous Integration and Delivery, to the **Credentials** tab and choose **+** *(Create Credentials)*.
+
+    ![Credentials](CICD_credentials.png)
 
 2. For **Name**, enter a freely chosen name for your credentials, which is unique in your SAP BTP subaccount, for example **`cfdeploy`**.
 
@@ -577,7 +580,25 @@ Create credentials for deploying your application to SAP BTP, Cloud Foundry envi
 
 6. Choose **Create**.
 
-[ACCORDION-BEGIN [Step 8: ](Integrate your system tests into your CI/CD pipeline)]
+[ACCORDION-BEGIN [Step 8: ](Configure your GitHub credentials)]
+
+If your GitHub repository is not private, you can skip this section. If your GitHub repository is private, configure credentials for it, so that SAP Continuous Integration and Delivery service can connect to it.
+
+1. In SAP Continuous Integration and Delivery, to the **Credentials** tab and choose **+** *(Create Credentials)*.
+
+2. For **Name**, enter a freely chosen name for your credential, which is unique in your SAP BTP subaccount. In this example, the name of the credential is **`github`**.
+
+3. As **Type**, select **Basic Authentication**.
+
+4. For **Username**, enter your GitHub username.
+
+5. For **Password**, use a [personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+
+    > Select **repo** as scope when creating the token.
+
+6. Choose **Create**.
+
+[ACCORDION-BEGIN [Step 9: ](Integrate your system tests into your CI/CD pipeline)]
 
  Configure a basic CI/CD job and automate your system tests by integrating them into a CI/CD pipeline.
 
@@ -591,7 +612,7 @@ Create credentials for deploying your application to SAP BTP, Cloud Foundry envi
 | --- | --- |
 |  Job Name	   |  Freely choose a unique name for your job, for example, `cap-bookshop-wdi5`. 
   Repository |From the drop-down list, choose your repository.
-|   Branch  |    Enter the branch of your repository for which you want to configure your CI/CD job. |
+|   Branch  |    Enter the branch of your repository for which you want to configure your CI/CD job, for example, `main`. |
 |  Pipeline   |   	From the drop-down list, choose **SAP Cloud Application Programming Model**.  |
 |  Version   | 	If you create a new job, the latest version is selected by default.    |
 |   State  |    To enable your job, choose **ON**. |
@@ -602,7 +623,7 @@ Create credentials for deploying your application to SAP BTP, Cloud Foundry envi
 
 5. In the **Stages** section, choose **Job Editor** as Configuration Mode.
 
-6. For the **Build** stage, keep the default values (build tool `mta` and verison `Java 8 Node 14`). Leave the execution of the **Maven Static Code Checks** and **Lint Check** step switched off.
+6. For the **Build** stage, keep the default values (for example, build tool `mta` and verison `Java 8 Node 14`).
 
 7. For the **Acceptance** stage, enter the following values for the **Deploy to Cloud Foundry Space** step:
 
@@ -613,9 +634,11 @@ Create credentials for deploying your application to SAP BTP, Cloud Foundry envi
 |    Space | Enter the name of the Cloud Foundry space in which you want to test your application.    |
 |    Credentials |    From the drop-down list, choose the SAP BTP credentials you created.  |
 
-![Deploy to CF Space Step](CICD_deploystep.png)
+![Deploy to CF Space Pamaeter](CF_Step.png)
 
-8. For the **Acceptance** stage, enter the following values for the **WebdriverIO Test** step:
+![Deploy to CF Space UI](CICD_deploystep.png)
+
+8. Enter the following values for the **WebdriverIO Test** step:
 
 |   Parameter  |   Value  |
 | --- | --- |
@@ -626,7 +649,7 @@ Create credentials for deploying your application to SAP BTP, Cloud Foundry envi
 
 9. Switch all other stages off and choose **Create**.
 
-> Note: As this tutorial focuses on how to get started with SAP Continuous Integration and Delivery, we’ve decided to configure only a very basic CI/CD pipeline in it. For how to configure more elaborate ones, see Supported Pipelines.
+> As this tutorial focuses on how to get started with SAP Continuous Integration and Delivery, we’ve decided to configure only a very basic CI/CD pipeline in it. For how to configure more elaborate ones, see Supported Pipelines.
 
 10. To run your CI/CD pipeline, choose **Run**.
 
@@ -636,7 +659,7 @@ You can get an overview of the test results in the detailed log of your build:
 
 -> TODO Screenshot
 
->(Optional) You can automate CI/CD builds using GitHub webhooks. Create and commit a code change in your GitHub project. 
+
 
 
 [DONE]
