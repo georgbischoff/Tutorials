@@ -116,7 +116,7 @@ In Visual Studio Code, set up and run your bookshop application.
     | Which reporter do you want to use? | spec, timeline (select them via SPACE) |
     | Do you want to add a plugin to your test setup? | No Plugin (ENTER) |
     | Do you want to add a service to your test setup? | chromedriver, ui5 (select them via SPACE) |
-    | What is the base url? | http://localhost:4004 |
+    | What is the base url? | http://localhost:4004/fiori-apps.html#Books-manage |
     | Do you want me to run npm install | Y or yes |
 
     The console output should look as follows:
@@ -148,16 +148,6 @@ In Visual Studio Code, set up and run your bookshop application.
            - Assertions, for example, checking if the newly created book is displayed in the list of books
 
          Page objects use locators to identify specific elements on the screen. Thereby, they allow test runners to see and do anything a real user would. Page objects reside in the `pageobjects` folder of your project.
-
-
-13. Open the created `wdio.conf.js` file and add the following snippet under `exports.config` to configure wdi5 correctly:
-
-    ```JavaScript
-    wdi5: {
-        logLevel: "error",
-        url: "fiori-apps.html#Books-manage",
-    },
-    ```
 
 14. Add following snippets to configure the timeline reporter correctly in the `wdio.conf.js`:
 
@@ -466,42 +456,42 @@ Choose **File** **→** **Save**.
 
     ![Terminal output after successful test](TerminalOutput.png) - TODO: Update image
 
-    Remarks: 
-    1. In case you are facing timeout error as shown below:
+    - Remarks: 
 
-    ![error snippet from console for step timeout](cucumbertimeout.png)
+        - In case you are facing timeout error as shown below:
+
+            ![error snippet from console for step timeout](cucumbertimeout.png)
      
-      The timeout property is applicable at each step definition. However, if you want to increase the timeout because your test takes longer than the default value, then you need to set it in the mocha framework options. In the wdio.conf.js set the time as shown below:
+            The timeout property is applicable at each step definition. However, if you want to increase the timeout because your test takes longer than the default value, then you need to set it in the mocha framework options. In the wdio.conf.js set the time as shown below:
     
-    ``` JavaScript
-    // wdio.conf.js
-    exports.config = {
-        //.....
-        mochaOpts: {
-            ui: 'bdd',
-            timeout: 60000
-        }
-        //.....
-    }
-    ```
+            ``` JavaScript
+            // wdio.conf.js
+            exports.config = {
+                //.....
+                mochaOpts: {
+                ui: 'bdd',
+                timeout: 60000
+                }
+                //.....
+            }
+            ```
 
-    2. Another known timeout error is while waiting for the ui5 controller to wait as shown below:
+        - Another known timeout error is while waiting for the ui5 controller to wait as shown below:
 
-    ![error snippet from console for ui5timeout](waitforui5error.png) 
+            ![error snippet from console for ui5timeout](waitforui5error.png) 
 
-      If you are getting timeout errors while waiting for an UI5 element to load or be visible, then consider increasing the maximum waiting time for the availability of UI5 control. In the wdio.conf.js set the time as shown below:
+            If you are getting timeout errors while waiting for an UI5 element to load or be visible, then consider increasing the maximum waiting time for the availability of UI5 control. In the wdio.conf.js set the time as shown below:
 
-    ``` JavaScript
-    /// wdio.conf.js
-    exports.config = {
-        //.....
-        wdi5: {
-            url: "fiori-apps.html#Books-manage",
-            waitForUI5Timeout: 60000,
-        },
-        //.....
-    }
-    ```
+            ``` JavaScript
+            /// wdio.conf.js
+            exports.config = {
+            //.....
+            wdi5: {
+                waitForUI5Timeout: 60000,
+            },
+            //.....
+            }
+            ```
 
 30. In the **EXPLORER** pane, right-click the `timeline-report.html` in the `target` folder and choose **Reveal in File Explorer**.
 
