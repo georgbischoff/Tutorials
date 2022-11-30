@@ -629,6 +629,7 @@ If your GitHub repository is not private, you can skip this section. If your Git
 
 |   Parameter  |   Value  |
 | --- | --- |
+| Application Name | Enter a unique application name. |
 |   API Endpoint  |   Enter the URL of your SAP BTP, Cloud Foundry API Endpoint. You can find it in the overview of your subaccount in the SAP BTP cockpit, under the **Cloud Foundry Environment** tab.  |
 |    Org Name |  Enter the name of your Cloud Foundry organization. You can also find it in the overview of your subaccount.   |
 |    Space | Enter the name of the Cloud Foundry space in which you want to test your application.    |
@@ -643,9 +644,11 @@ If your GitHub repository is not private, you can skip this section. If your Git
 |   Parameter  |   Value  |
 | --- | --- |
 |   npm Script  |   Keep the default test script (`wdio`).  |
-|    Base URL  |  Enter the URL of the application against which the tests should be executed. If you don't know the URL, you can deploy your application first. You will find the generated URL by navigating to **Subaccount** **&rarr;** **Cloud Foundry Space** **&rarr;** Overview page of the application **&rarr;** **Application Routes**. |
+|    Base URL  |  Enter the URL of the application against which the tests should be executed. If you don't know the URL, you can deploy your application first. You will find the generated URL by navigating to **Subaccount** **&rarr;** **Cloud Foundry Space** **&rarr;** Overview page of the application **&rarr;** **Application Routes**. ![Deploy to CF Space UI](CICD_deploystep.png) |
 |    Space | Enter the name of the Cloud Foundry space in which you want to test your application.    |
 |    Credentials |    As your test application doesn’t require credentials, leave this field empty. |
+
+![Base URL find](AppRoute.png)
 
 9. Switch all other stages off and choose **Create**.
 
