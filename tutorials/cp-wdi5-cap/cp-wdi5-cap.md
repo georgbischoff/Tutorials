@@ -454,53 +454,56 @@ Choose **File** **→** **Save**.
 
     If your test run was successful, your terminal response should look as follows:
 
-    ![Terminal output after successful test](TerminalOutput.png) - TODO: Update image
+    ![Terminal output after successful test](TerminalOutput.png)
 
-    - Remarks: 
+    > Note:
+    >
+    >- In case you are facing timeout error as shown below:
+    >
+     >![error snippet from console for step timeout](cucumbertimeout.png)
+     >    
+     >The timeout property is applicable at each step definition. However, if you want to increase the timeout because your test takes longer than the default value, then you need to set it in the mocha framework options. In the wdio.conf.js set the time as shown below:
+    >    
+    >            ``` JavaScript
+    >            // wdio.conf.js
+    >            exports.config = {
+    >                //.....
+    >                mochaOpts: {
+    >                ui: 'bdd',
+    >                timeout: 60000
+    >                }
+    >                //.....
+    >            }
+    >            ```
 
-        - In case you are facing timeout error as shown below:
+    >- Another known timeout error is while waiting for the ui5 controller to wait as shown below:
 
-            ![error snippet from console for step timeout](cucumbertimeout.png)
-     
-            The timeout property is applicable at each step definition. However, if you want to increase the timeout because your test takes longer than the default value, then you need to set it in the mocha framework options. In the wdio.conf.js set the time as shown below:
-    
-            ``` JavaScript
-            // wdio.conf.js
-            exports.config = {
-                //.....
-                mochaOpts: {
-                ui: 'bdd',
-                timeout: 60000
-                }
-                //.....
-            }
-            ```
+    > ![error snippet from console for ui5timeout](waitforui5error.png) 
+    >
+    >If you are getting timeout errors while waiting for an UI5 element to load or be visible, then consider increasing the maximum waiting time for the availability of UI5 control. In the wdio.conf.js set the time as shown below:
+    >    
+    >           ``` JavaScript
+    >            /// wdio.conf.js
+    >            exports.config = {
+    >            //.....
+    >            wdi5: {
+    >                waitForUI5Timeout: 60000,
+    >            },
+    >            //.....
+    >            }
+    >           ```
 
-        - Another known timeout error is while waiting for the ui5 controller to wait as shown below:
-
-            ![error snippet from console for ui5timeout](waitforui5error.png) 
-
-            If you are getting timeout errors while waiting for an UI5 element to load or be visible, then consider increasing the maximum waiting time for the availability of UI5 control. In the wdio.conf.js set the time as shown below:
-
-            ``` JavaScript
-            /// wdio.conf.js
-            exports.config = {
-            //.....
-            wdi5: {
-                waitForUI5Timeout: 60000,
-            },
-            //.....
-            }
-            ```
 
 30. In the **EXPLORER** pane, right-click the `timeline-report.html` in the `target` folder and choose **Reveal in File Explorer**.
 
-31. Double-click the `timeline-report` in the file explorer: - TODO: Update
+31. Double-click the `timeline-report` in the file explorer: 
 
-    ![timeline-report.html in the file explorer](ReportHtml.png) - TODO: Update image
+    ![timeline-report.html in the file explorer](ReportHtml.png) 
 
+[DONE]
+[ACCORDION-END]
 
-[ACCORDION-BEGIN [Step 6: ](Set Up SAP Continuous Integration and Delivery)]
+[ACCORDION-BEGIN [Step 5: ](Set Up SAP Continuous Integration and Delivery)]
 
 Enable SAP Continuous Integration and Delivery, add the required permissions for it, and access the service.
 
@@ -515,52 +518,40 @@ Enable SAP Continuous Integration and Delivery, add the required permissions for
 
     ![Service Tile](CICD_ServiceTile.png)
 
-3. Choose **Create**.
+3. In the **New Instance or Subscription** pop-up, leave the default values and choose **Create**.
 
-4. In the **New Instance or Subscription** pop-up, leave the default values and choose **Create**.
+    > **Note:** If in the **Service Marketplace** in your subaccount, you didn't see the **Continuous Integration & Delivery** tile, you might need to add the required entitlements:
+    > 1. From the navation pane, choose **Entitlements**.
+    > 2. In the **Entitlements** overview of your subaccount, choose **Configure Entitlements**.
+    > 3. Choose **Add Service Plans**.
+    > 4. Search for **Continuous Integration & Delivery**.
+    > 5. In the **Service Details: Continuous Integration & Delivery** pane, check the box next to **trial (Application)** and choose **Add 1 Service Plan**.
+    > 6. Back in the **Entitlements** overview of your subaccount, choose **Save**.
 
-6. From the navigation pane, choose ![Security icon in the cockpit](icon-security.png) **Security** **&rarr;** **Users**.
+4. From the navigation pane, choose ![Security icon in the cockpit](icon-security.png) **Security** **&rarr;** **Users**.
 
     >If you use an enterprise account, you need to be a User & Role Administrator of your subaccount to view the ![Security icon in the cockpit](icon-security.png) **Security** section. See [Managing Subaccounts Using the Cockpit](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/55d0b6d8b96846b8ae93b85194df0944.html).
 
-7. Choose the name of your user.
+5. Choose the name of your user.
 
-8. From the **Role Collections** section, choose **Assign Role Collection**.
+6. From the **Role Collections** section, choose **Assign Role Collection**.
 
-9. From the dropdown list, select **CICD Service Administrator** and **CICD Service Developer**. Confirm your choice with **Assign Role Collection**.
+7. From the dropdown list, select **CICD Service Administrator** and **CICD Service Developer**. Confirm your choice with **Assign Role Collection**.
 
     ![Assigning the CI/CD Roles](CICD_roles.png)
 
-10. Navigate back to your subaccount overview and from the navigation pane, choose **Service Marketplace**.
+8. Navigate back to your subaccount overview and from the navigation pane, choose **Service Marketplace**.
 
-11. In the **Extension Suite – Development Efficiency** category, choose **Continuous Integration & Delivery**.
+9. In the **Extension Suite – Development Efficiency** category, choose **Continuous Integration & Delivery**.
 
-12. Choose ![Security icon in the cockpit](icon-dots.png) *(Actions)* **&rarr;** **Go to Application**.
+10. Choose ![Security icon in the cockpit](icon-dots.png) *(Actions)* **&rarr;** **Go to Application**.
 
     ![Accessing the CI/CD service](CICD_access.png)
 
+[DONE]
+[ACCORDION-END]
 
-[ACCORDION-BEGIN [Step 6: ](Add Your Repository to SAP Continuous Integration and Delivery)]
-
-Connect SAP Continuous Integration and Delivery with the repository in which your project's sources reside.
-
-
-1. In SAP Continuous Integration and Delivery, choose **Repositories** → **+** _(Add)_.
-
-2. In the **Add Repository** pop-up, add a name for your repository.
-
-3. In GitHub, copy the HTTPS clone URL of the repository containing the sample CAP application.
-
-    ![Copy GitHub Clone URL](CICD_CloneURL.png)
-
-4. Paste it into the **Clone URL** field in the **Add Repository** pop-up in SAP Continuous Integration and Delivery. 
-
-5. Choose **Add**.
-
-    >(Optional) You can automate CI/CD builds using GitHub webhooks. You can trigger a build by creating and commiting a code change in your GitHub project. For more information, see [Add a Webhook in GitHub](https://help.sap.com/docs/CONTINUOUS_DELIVERY/99c72101f7ee40d0b2deb4df72ba1ad3/090d4aaa9628426b91c90e8284213040.html).
-
- 
-[ACCORDION-BEGIN [Step 7: ](Configure your SAP BTP credentials)]
+[ACCORDION-BEGIN [Step 6: ](Configure your SAP BTP credentials)]
 
 Create credentials for deploying your application to SAP BTP, Cloud Foundry environment.
 
@@ -580,7 +571,10 @@ Create credentials for deploying your application to SAP BTP, Cloud Foundry envi
 
 6. Choose **Create**.
 
-[ACCORDION-BEGIN [Step 8: ](Configure your GitHub credentials)]
+[DONE]
+[ACCORDION-END]
+
+[ACCORDION-BEGIN [Step 7: ](Configure your GitHub credentials)]
 
 If your GitHub repository is not private, you can skip this section. If your GitHub repository is private, configure credentials for it, so that SAP Continuous Integration and Delivery service can connect to it.
 
@@ -597,6 +591,30 @@ If your GitHub repository is not private, you can skip this section. If your Git
     > Select **repo** as scope when creating the token.
 
 6. Choose **Create**.
+
+[DONE]
+[ACCORDION-END]
+
+[ACCORDION-BEGIN [Step 8: ](Add Your Repository to SAP Continuous Integration and Delivery)]
+
+Connect SAP Continuous Integration and Delivery with the repository in which your project's sources reside.
+
+1. In SAP Continuous Integration and Delivery, choose **Repositories** → **+** _(Add)_.
+
+2. In the **Add Repository** pop-up, add a name for your repository.
+
+3. In GitHub, copy the HTTPS clone URL of the repository containing the sample CAP application.
+
+    ![Copy GitHub Clone URL](CICD_CloneURL.png)
+
+4. Paste it into the **Clone URL** field in the **Add Repository** pop-up in SAP Continuous Integration and Delivery. 
+
+5. Choose **Add**.
+
+    >(Optional) You can automate CI/CD builds using GitHub webhooks. You can trigger a build by creating and commiting a code change in your GitHub project. For more information, see [Add a Webhook in GitHub](https://help.sap.com/docs/CONTINUOUS_DELIVERY/99c72101f7ee40d0b2deb4df72ba1ad3/090d4aaa9628426b91c90e8284213040.html).
+
+[DONE]
+[ACCORDION-END]
 
 [ACCORDION-BEGIN [Step 9: ](Integrate your system tests into your CI/CD pipeline)]
 
@@ -660,7 +678,7 @@ As a result, a build of the connected job is triggered and a new build tile appe
 
 You can get an overview of the test results in the detailed log of your build:
 
--> TODO Screenshot
+![Base URL find](BuildSuccess.png)
 
 
 
