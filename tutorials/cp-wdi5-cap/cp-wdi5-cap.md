@@ -38,7 +38,7 @@ The tutorial consists of three main stages:
 
 2. Create and run system tests with wdi5 that add a new book to your bookshop and check if it's displayed in the list.
 
-3. Automate your system tests by integrating them into a CI/CD pipeline. 
+3. Automate your system tests by integrating them into a CI/CD pipeline.
 
 ### About System Tests with wdi5
 
@@ -60,7 +60,7 @@ The SAPUI5 Test Recorder is a tool that helps you create integration and system 
 
 > For more information about the SAPUI5 Test Recorder, see [Test Recorder](https://sapui5.hana.ondemand.com/#/topic/2535ef9272064cb6bd6b44e5402d531d).
 
-### About SAP Continuous Integration and Delivery 
+### About SAP Continuous Integration and Delivery
 
 SAP Continuous Integration and Delivery is a service on SAP Business Technology Platform, which lets you configure and run predefined continuous integration and delivery pipelines that build, test, and deploy your code changes.
 It provides an easy, UI-guided way to set up the service and configure and run your pipelines, without hosting your own Jenkins instance. See [What Is SAP Continuous Integration and Delivery?](https://help.sap.com/docs/CONTINUOUS_DELIVERY/99c72101f7ee40d0b2deb4df72ba1ad3/618ca03fdca24e56924cc87cfbb7673a.html?version=Cloud).
@@ -85,7 +85,7 @@ In Visual Studio Code, set up and run your bookshop application.
 
     As a result, the project `CAP-BOOKSHOP-WDI5` is loaded into the **EXPLORER** pane and you can see its resources in the outline:
 
-    ![Resources of the project in the explorer pane](FolderStructure.png) 
+    ![Resources of the project in the explorer pane](FolderStructure.png)
 
 6. In Visual Studio Code, choose **Terminal** **→** **New Terminal**.
 
@@ -105,32 +105,17 @@ In Visual Studio Code, set up and run your bookshop application.
 
 9. Open a new Terminal, for that choose **Terminal** **→** **New Terminal**
 
-10. Use the command `npm init wdio ./fiori/app/admin-books/webapp/test/wdi5/` to call the guided installation of WebdriverIO. Answer the questions as follows:
-    | Question | Answer |
-    | ----------- | ----------- |
-    | Where is my automation backend located? | On my local machine |
-    | Which framework do you want to use? | mocha |
-    | Do you want to use a compiler? | No! |
-    | Where are your test specs located? | ./specs/*.js |
-    | Do you want WebdriverIO to autogenerate some test files? | N or no |
-    | Which reporter do you want to use? | spec, timeline (select them via SPACE) |
-    | Do you want to add a plugin to your test setup? | No Plugin (ENTER) |
-    | Do you want to add a service to your test setup? | chromedriver, ui5 (select them via SPACE) |
-    | What is the base url? | http://localhost:4004/fiori-apps.html#Books-manage |
-    | Do you want me to run npm install | Y or yes |
+10. Use the command `npm init wdi5@latest -- --configPath ./fiori/app/admin-books/webapp/test/wdi5/ --specs ./**/wdi5/specs/**.js --baseUrl http://localhost:4004/fiori-apps.html\#Books-manage` to call the quickstart installation of wdi5.
 
     The console output should look as follows:
 
-    ![Terminal response for the 'npm init wdio' command](wdi5_init.png)  
-    
+    ![Terminal response for the 'npm init wdi5' command](wdi5_init.png)
+
 11. In your project in the **EXPLORER** pane, choose **`fiori`** **→** **`app`** **→** **`admin-books`** **→** **`webapp`** **→** **`test`** **→** **`wdi5`**.
 
 12. Now you can see all the files through which you can define system tests with wdi5:
 
     ![Resources of the wdi5 folder in the explorer pane](wdi5FolderStructure.png)
-
-    >The `test\wdi5` folder is created with the first test execution.
-
 
     - (a) The `wdio.conf.js` file:
 
@@ -148,6 +133,12 @@ In Visual Studio Code, set up and run your bookshop application.
            - Assertions, for example, checking if the newly created book is displayed in the list of books
 
          Page objects use locators to identify specific elements on the screen. Thereby, they allow test runners to see and do anything a real user would. Page objects reside in the `pageobjects` folder of your project.
+
+13. Use the command `npm install --save wdio-timeline-reporter` to install the timeline reporter
+
+    The console ouput should look as follows:
+
+    ![Terminal response for the 'npm install --save wdio-timeline-reporter' command](wdi5_install_timeline_reporter.png)
 
 14. Add following snippets to configure the timeline reporter correctly in the `wdio.conf.js`:
 
@@ -179,7 +170,7 @@ In Visual Studio Code, set up and run your bookshop application.
 
 15. Now, your project setup is ready. Make sure that your code looks as follows and choose **File** **→** **Save**.
 
-    ![wdio.conf.js after finishing the project setup](confjs.png) - TODO: Update image Simon
+    ![wdio.conf.js after finishing the project setup without comments](confjs.png)
 
 
 [VALIDATE_6]x
@@ -197,7 +188,7 @@ Familiarize yourself with your test scenario before starting to code it. Later, 
 
 2. Choose **Create**:
 
-    !![Create button in bookshop app](createButton.png) => TODO Update image
+    !![Create button in bookshop app](createButton.png)
 
 3. Enter the title of your new book, for example, *How to Cook Pancakes*:
 
@@ -266,7 +257,7 @@ Create a wdi5 script to test the creation of a new book in your bookshop applica
 
     This file represents the page object for your bookshop application. In page objects, you can define actions that are performed during a test and make assertions:
 
-    ![Structure of page objects](manageBooksPO.png) - TODO: Update
+    ![Structure of page objects](manageBooksPO.png)
 
 5. In the bookshop application in Google Chrome, press **CTRL** + **SHIFT** + **ALT** + **T** (if you use a Windows system) or **SHIFT** + **CTRL** + **OPTION** + **T** (if you use a Mac system) to open the Test Recorder in a new browser window.
 
@@ -274,17 +265,17 @@ Create a wdi5 script to test the creation of a new book in your bookshop applica
 
     As a result, the Test Recorder highlights the entry to indicate its activity:
 
-    ![Test recorder highlights the create button](CreateButtonPress.gif) 
+    ![Test recorder highlights the create button](CreateButtonPress.gif)
 
     Now, the Test Recorder provides a code snippet for your test:
 
-    ![Test recorder provides code snippet for wdi5 test](SelectDialectwdi5.gif) 
+    ![Test recorder provides code snippet for wdi5 test](SelectDialectwdi5.gif)
 
     Please make sure that the dialect *wdi5* is selected.
 
 7. Copy the generated code snippet into the `module.exports` section of your `manageBooks.page.js` and name the function `iClickOnCreateNewBook`.
 
-    ![Clicking the create button action in the manageBooks page object](ClickCreateButtonLogic.png) 
+    ![Clicking the create button action in the manageBooks page object](ClickCreateButtonLogic.png)
 
 [DONE]
 [ACCORDION-END]
@@ -319,11 +310,11 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     As a result, the Test Recorder highlights the input field to indicate its activity:
 
-    ![teched.spec.js with enter title action](EnterTitle2.gif) 
+    ![teched.spec.js with enter title action](EnterTitle2.gif)
 
     Now, the Test Recorder provides a code snippet for your test:
 
-    ![The test recorder provides a code snippet for the enter title action](wdi5_EnterBookTitle.png) 
+    ![The test recorder provides a code snippet for the enter title action](wdi5_EnterBookTitle.png)
 
     Please make sure that the dialect *wdi5* is selected.
 
@@ -338,7 +329,7 @@ Create a wdi5 script to test the addition of detailed information to your newly 
     ``` JavaScript
     await NewBookPage.iSelectGenre();
     ```
-    ![Code snippet for select genre action in bookshop.test.js file](SelectGenreSpec.png)   
+    ![Code snippet for select genre action in bookshop.test.js file](SelectGenreSpec.png)
 
 8. In your bookshop application, right-click the **Genre** drop-down menu and choose **Press**.
 
@@ -348,7 +339,7 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     Now, the Test Recorder provides a code snippet for your test:
 
-    ![The test recorder provides a code snippet for the genre drop-down menu](GenreDropDownSnippet.png) 
+    ![The test recorder provides a code snippet for the genre drop-down menu](GenreDropDownSnippet.png)
 
     Please make sure that the dialect *wdi5* is selected.
 
@@ -380,17 +371,17 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
 15. Copy the generated snippet into the `module.exports` section of your `newBook.page.js`. Name the funcions `iPressCreate` and add the expected behavior to your `bookshop.test.js`.
 
-    ![newBook.page.js after adding the code snippet for pressing the Create button](ClickSaveBtnSnippet.png) 
+    ![newBook.page.js after adding the code snippet for pressing the Create button](ClickSaveBtnSnippet.png)
 
 16. To ensure that the save action was successful, verify that the **Edit** button is displayed. Add the expected behavior to your `bookshop.test.js`:
 
-    ![bookshop.test.js after adding the code snippet for verifying that the edit button is displayed](EditButtonAssertion1.png) 
+    ![bookshop.test.js after adding the code snippet for verifying that the edit button is displayed](EditButtonAssertion1.png)
 
 17. In the bookshop application, right-click the **Edit** button and choose **Highlight**.
 
 18. On the right side of the Test Recorder window you find a section with Properties and Bindings. Choose the icon that is located on the left of the property *enabled*. This will `expect(enabled).toBeTruthy();` to the code snippet.
 
-    ![Code snipped with property "enabled"](EnabledButton.gif) 
+    ![Code snipped with property "enabled"](EnabledButton.gif)
 
 19. Copy the generated code snippet from the Test Recorder into the `module.exports` section in your `newBook.page.js` and name the function `iSeeEditButton`. - TODO(Georg,Simon): Update and Remove the next step
 
@@ -434,22 +425,22 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
 26. On the right side of the Test Recorder window you find a section with Properties and Bindings. Choose the icon that is located on the left of the property *visible* in the *Inherited* section. This will add `expect(visible).toBeTruthy();` to the code snippet. => TODO(Georg,Simon): Shall we use that as assertion
 
-    ![Test recorder highlights the book entry](Title-HighlightEvent.gif) 
+    ![Test recorder highlights the book entry](Title-HighlightEvent.gif)
 
 27. Copy the generated code snippet into the `module.exports` section of your `manageBooks.page.js` and name the function `theBookListContains`.
 
     It look as follows:
 
-    ![Page object after adding the code snippet from the test recorder](NewBookisInList.png) 
+    ![Page object after adding the code snippet from the test recorder](NewBookisInList.png)
 
-Choose **File** **→** **Save**.    
+Choose **File** **→** **Save**.
 
 28. Right-click your *test\wdi5* folder in the **EXPLORER** pane and choose **Open in Integrated Terminal**.
 
 29. To run your test, execute the following command:
 
     ```Bash/Shell
-    npm run wdio
+    npm run wdi5
     ```
 
     If your test run was successful, your terminal response should look as follows:
@@ -461,16 +452,16 @@ Choose **File** **→** **Save**.
     >- In case you are facing timeout error as shown below:
     >
      >![error snippet from console for step timeout](cucumbertimeout.png)
-     >    
+     >
      >The timeout property is applicable at each step definition. However, if you want to increase the timeout because your test takes longer than the default value, then you need to set it in the mocha framework options. In the wdio.conf.js set the time as shown below:
-    >    
+    >
     >            ``` JavaScript
     >            // wdio.conf.js
     >            exports.config = {
     >                //.....
     >                mochaOpts: {
-    >                ui: 'bdd',
-    >                timeout: 60000
+    >                   ui: 'bdd',
+    >                   timeout: 60000
     >                }
     >                //.....
     >            }
@@ -478,27 +469,41 @@ Choose **File** **→** **Save**.
 
     >- Another known timeout error is while waiting for the ui5 controller to wait as shown below:
 
-    > ![error snippet from console for ui5timeout](waitforui5error.png) 
+    > ![error snippet from console for ui5timeout](waitforui5error.png)
     >
     >If you are getting timeout errors while waiting for an UI5 element to load or be visible, then consider increasing the maximum waiting time for the availability of UI5 control. In the wdio.conf.js set the time as shown below:
-    >    
+    >
     >           ``` JavaScript
-    >            /// wdio.conf.js
-    >            exports.config = {
-    >            //.....
-    >            wdi5: {
-    >                waitForUI5Timeout: 60000,
-    >            },
-    >            //.....
-    >            }
+    >           /// wdio.conf.js
+    >           exports.config = {
+    >               //.....
+    >               wdi5: {
+    >                   waitForUI5Timeout: 60000,
+    >               },
+    >               //.....
+    >           }
     >           ```
+
+    >- Another timeout we have to increase when we increase the `waitForUI5Timeout` and/or the `mochaOpts` timeout higher than 30 seconds is the session script timeout. In the wdio.conf.js set the time as shown below:
+    >
+    >           ``` JavaScript
+    >           /// wdio.conf.js
+    >           exports.config = {
+    >               //.....
+    >               before: function (capabilities, spec) {
+    >                   browser.setTimeout({ 'script': 60000 })
+    >               },
+    >               //.....
+    >           }
+    >           ````
+
 
 
 30. In the **EXPLORER** pane, right-click the `timeline-report.html` in the `target` folder and choose **Reveal in File Explorer**.
 
-31. Double-click the `timeline-report` in the file explorer: 
+31. Double-click the `timeline-report` in the file explorer:
 
-    ![timeline-report.html in the file explorer](ReportHtml.png) 
+    ![timeline-report.html in the file explorer](ReportHtml.png)
 
 [DONE]
 [ACCORDION-END]
@@ -607,7 +612,7 @@ Connect SAP Continuous Integration and Delivery with the repository in which you
 
     ![Copy GitHub Clone URL](CICD_CloneURL.png)
 
-4. Paste it into the **Clone URL** field in the **Add Repository** pop-up in SAP Continuous Integration and Delivery. 
+4. Paste it into the **Clone URL** field in the **Add Repository** pop-up in SAP Continuous Integration and Delivery.
 
 5. Choose **Add**.
 
@@ -620,7 +625,7 @@ Connect SAP Continuous Integration and Delivery with the repository in which you
 
  Configure a basic CI/CD job and automate your system tests by integrating them into a CI/CD pipeline.
 
-1. Execute a Git commit and push the content of your local `CAP-BOOKSHOP-WDI5` project into your GitHub repository.  
+1. Execute a Git commit and push the content of your local `CAP-BOOKSHOP-WDI5` project into your GitHub repository.
 
 2. In SAP Continuous Integration and Delivery, go to the Jobs tab and choose **+** *(Create job)*.
 
@@ -628,7 +633,7 @@ Connect SAP Continuous Integration and Delivery with the repository in which you
 
 |   Parameter  |  Value   |
 | --- | --- |
-|  Job Name	   |  Freely choose a unique name for your job, for example, `cap-bookshop-wdi5`. 
+|  Job Name	   |  Freely choose a unique name for your job, for example, `cap-bookshop-wdi5`.
   Repository |From the drop-down list, choose your repository.
 |   Branch  |    Enter the branch of your repository for which you want to configure your CI/CD job, for example, `main`. |
 |  Pipeline   |   	From the drop-down list, choose **SAP Cloud Application Programming Model**.  |
