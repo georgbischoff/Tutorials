@@ -18,7 +18,7 @@ primary_tag: software-product-function>sap-cloud-application-programming-model
     ```
     If you encounter any problems when installing the `cds` development kit, have a look at [this troubleshooting section](https://cap.cloud.sap/docs/advanced/troubleshooting#npm-installation).
 - Your Google Chrome version is up to date. See [Update Google Chrome](https://support.google.com/chrome/answer/95414?co=GENIE.Platform%3DDesktop&hl=en).
-- You have an [SAP Business Technology Platform (BTP) Trial Account](https://developers.sap.com/tutorials/hcp-create-trial-account.html).
+- You have an [SAP Business Technology Platform (BTP) Trial Account](https://developers.sap.com/tutorials/hcp-create-trial-account.html) with a subaccount hosted in the region "US East (VA)".
 - You have an account on [GitHub](https://github.com/).
 
 ## Details
