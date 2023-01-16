@@ -666,8 +666,8 @@ Connect SAP Continuous Integration and Delivery with the repository in which you
 
 |   Parameter  |   Value  |
 | --- | --- |
-|   npm Script  |   Keep the default test script (`wdio`).  |
-|    Base URL  |  Enter the URL of the application against which the tests should be executed. If you don't know the URL, you can deploy your application first. You will find the generated URL by navigating to **Subaccount** **&rarr;** **Cloud Foundry Space** **&rarr;** Overview page of the application **&rarr;** **Application Routes**. |
+|   npm Script  |   Use the same script name that is used to execute for local execution of the tests (`wdi5`).  |
+|    Base URL  |  Enter the URL of the application against which the tests shall be executed. The application will be available under the following URL: `https://<Org Name>-<Space>-bookshop-srv.cfapps.us10-001.hana.ondemand.com/fiori-apps.html#Books-manage`. Depending on your region `us10-001` could also differ.|
 |    Space | Enter the name of the Cloud Foundry space in which you want to test your application.    |
 |    Credentials |    As your test application doesn’t require credentials, leave this field empty. |
 
