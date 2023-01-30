@@ -140,7 +140,7 @@ In Visual Studio Code, set up and run your bookshop application.
 
     ![Terminal response for the 'npm install --save wdio-timeline-reporter' command](wdi5_install_timeline_reporter.png)
 
-14. Add following snippets to configure the timeline reporter correctly in the `wdio.conf.js`:
+14. Add following snippets to configure the timeline reporter and the chrome browser correctly in the `wdio.conf.js`:
 
     ```JavaScript
     const { TimelineService } = require("wdio-timeline-reporter/timeline-service");
@@ -165,6 +165,19 @@ In Visual Studio Code, set up and run your bookshop application.
         },
         ]
     ],
+    // ...
+    ```
+
+    ```JavaScript
+    // ...
+    capabilities: [{
+        maxInstances: 5,
+        browserName: 'chrome',
+        acceptInsecureCerts: true,
+        "goog:chromeOptions": {
+            args: ["--no-sandbox", "--disable-dev-shm-usage"]
+        }
+    }],
     // ...
     ```
 
@@ -329,6 +342,7 @@ Create a wdi5 script to test the addition of detailed information to your newly 
     ``` JavaScript
     await NewBookPage.iSelectGenre();
     ```
+
     ![Code snippet for select genre action in bookshop.test.js file](SelectGenreSpec.png)
 
 8. In your bookshop application, right-click the **Genre** drop-down menu and choose **Press**.
@@ -379,21 +393,17 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
 17. In the bookshop application, right-click the **Edit** button and choose **Highlight**.
 
-18. On the right side of the Test Recorder window you find a section with Properties and Bindings. Choose the icon that is located on the left of the property *enabled*. This will `expect(enabled).toBeTruthy();` to the code snippet.
+18. On the right side of the Test Recorder window you find a section with Properties and Bindings. Choose the icon that is located on the left of the property *enabled*. This will add `expect(enabled).toBeTruthy();` to the code snippet.
 
     ![Code snipped with property "enabled"](EnabledButton.gif)
 
-19. Copy the generated code snippet from the Test Recorder into the `module.exports` section in your `newBook.page.js` and name the function `iSeeEditButton`. - TODO(Georg,Simon): Update and Remove the next step
+19. Copy the generated code snippet from the Test Recorder into the `module.exports` section in your `newBook.page.js` and name the function `iSeeEditButton`.
 
     It should look as follows:
 
     ![Page object after adding the code snippet from the test recorder](EditButtonAssertionPO.png)
 
-20. In the bookshop application, right-click the **<** *(Go Back)* button and choose **Press**.
-
-    ![Test recorder highlights the navigate back button](BackButton-PressEvent.gif)
-
-21. In the `bookshop.test.js` file, implement the `it` function by adding the skeleton of the *should check book is added* test:
+20. Let's proceed with our test scenario by implementing another `it` function in the `bookshop.test.js` file. To achieve that we need to add the skeleton of the *should check book is added* test function:
 
     ```JavaScript
     it("should check book is added", async () => {
@@ -401,25 +411,29 @@ Create a wdi5 script to test the addition of detailed information to your newly 
     });
     ```
 
-22. Again, copy the generated code snippet into the `module.exports` section of your `newBook.page.js` and name it `iNavigateBack`.
+21. In this `it` function we need two steps. First an action to navigate back to the list of books and a second step to assert that our newly created book is contained in the list. Implement this as follows in the *it* block:
+
+    ```JavaScript
+    await NewBookPage.iNavigateBack();
+    await ManageBooksPage.theBookListContains(bookTitle);
+    ```
+
+    Now, your test is complete. Make sure that it looks as follows:
+    ![Complete test in newBook.page.js](TechedspecFile.png)
+
+22. To get the code-snippet for the implementation of the `NewBookPage.iNavigateBack` action, right-click the **<** *(Go Back)* button and choose **Press** in the bookshop application.
+
+    ![Test recorder highlights the navigate back button](BackButton-PressEvent.gif)
+
+23. Again, copy the generated code snippet into the `module.exports` section of your `newBook.page.js` and name it `iNavigateBack`.
 
     Your page object should now look as follows:
 
     ![Page object with action for pressing the back button](BackButtonVSCode.png)
 
-23. In your bookshop application, choose the **<** *(back)* button.
+24. In your bookshop application, choose the **<** *(back)* button.
 
     As a result, you should see the list of all books, including the one you've added.
-
-24. In your `newBook.page.js`, add this fact as an expected behavior:
-
-    ```JavaScript
-    await ManageBooksPage.theBookListContains(bookTitle);
-    ```
-
-    Now, your test is complete. Make sure that it looks as follows:
-
-    ![Complete test in newBook.page.js](TechedspecFile.png)
 
 25. In the list of books of your bookshop application, right-click the title of the book you've created and choose **Highlight**. Make sure that only the specific Title of the row is blue highlighted and not the whole row.
 
