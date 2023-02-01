@@ -105,7 +105,7 @@ In Visual Studio Code, set up and run your bookshop application.
 
 9. Open a new Terminal, for that choose **Terminal** **→** **New Terminal**
 
-10. Use the command `npm init wdi5@latest -- --configPath ./fiori/app/admin-books/webapp/test/wdi5/ --specs ./**/wdi5/specs/**.js --baseUrl http://localhost:4004/fiori-apps.html\#Books-manage` to call the quickstart installation of wdi5.
+10. Use the command `npm init wdi5@latest -- --configPath ./app/admin-books/webapp/test/wdi5/ --specs ./**/wdi5/specs/**.js --baseUrl http://localhost:4004/fiori-apps.html\#Books-manage` to call the quickstart installation of wdi5.
 
     The console output should look as follows:
 
@@ -201,7 +201,7 @@ Familiarize yourself with your test scenario before starting to code it. Later, 
 
 2. Choose **Create**:
 
-    !![Create button in bookshop app](createButton.png)
+    ![Create button in bookshop app](CreateButton.png)
 
 3. Enter the title of your new book, for example, *How to Cook Pancakes*:
 
@@ -282,7 +282,7 @@ Create a wdi5 script to test the creation of a new book in your bookshop applica
 
     Now, the Test Recorder provides a code snippet for your test:
 
-    ![Test recorder provides code snippet for wdi5 test](SelectDialectwdi5.gif)
+    ![Test recorder provides code snippet for wdi5 test](SelectDialectwdi5.png)
 
     Please make sure that the dialect *wdi5* is selected.
 
@@ -333,7 +333,7 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
 6. Copy this code snippet into the `module.exports` section of your `newBook.page.js` and name the function `iEnterTitle`.
 
-    Here, pass the `sTitle` as an argument in the function name and use it in the `enterText()` method.
+    Here, pass the `sBook` as an argument in the function name and use it in the `enterText()` method.
 
     ![Code snippet for enter title action in newBook page object](EnterTitleSnippet.png)
 
@@ -437,11 +437,11 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
 25. In the list of books of your bookshop application, right-click the title of the book you've created and choose **Highlight**. Make sure that only the specific Title of the row is blue highlighted and not the whole row.
 
-26. On the right side of the Test Recorder window you find a section with Properties and Bindings. Choose the icon that is located on the left of the property *visible* in the *Inherited* section. This will add `expect(visible).toBeTruthy();` to the code snippet. => TODO(Georg,Simon): Shall we use that as assertion
+26. On the right side of the Test Recorder window you find a section with Properties and Bindings. Choose the icon that is located on the left of the property *visible* in the *Inherited* section. This will add `expect(visible).toBeTruthy();` to the code snippet.
 
     ![Test recorder highlights the book entry](Title-HighlightEvent.gif)
 
-27. Copy the generated code snippet into the `module.exports` section of your `manageBooks.page.js` and name the function `theBookListContains`.
+27. Copy the generated code snippet into the `module.exports` section of your `manageBooks.page.js` and name the function `theBookListContains`. Here, pass the `sBook` as an argument in the function name and use it in the locator to identify the control by its text.
 
     It look as follows:
 
