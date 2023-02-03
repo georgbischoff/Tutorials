@@ -364,7 +364,7 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
 9. Copy this code snippet into the `module.exports` section of your `newBook.page.js` and name the function `iSelectGenre`.
 
-    !![Code snippet for select genre action in newBook page object](GenreSpecs.png)
+    ![Code snippet for select genre action in newBook page object](GenreSpecs.png)
 
 10. From the **Genre** pop-up window in your bookshop application, right-click **Fiction** and choose **Press**.
 
@@ -386,36 +386,36 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     ![newBook.page.js after adding the steps from choosing the author](CodeSnippetChooseAuthor.png)
 
-12. In the *it* block of your `bookshop.test.js`, add the following line to select the create button at the bottom of the application:
+14. In the *it* block of your `bookshop.test.js`, add the following line to select the create button at the bottom of the application:
 
     ```JavaScript
     await NewBookPage.iPressCreate();
     await NewBookPage.iSeeEditButton()
     ```
 
-14. Now, at the footer in the bookshop application, right-click the **Create** button and choose **Press**.
+15. Now, at the footer in the bookshop application, right-click the **Create** button and choose **Press**.
 
-15. Copy the generated snippet into the `module.exports` section of your `newBook.page.js`. Name the funcions `iPressCreate` and add the expected behavior to your `bookshop.test.js`.
+16. Copy the generated snippet into the `module.exports` section of your `newBook.page.js`. Name the funcions `iPressCreate` and add the expected behavior to your `bookshop.test.js`.
 
     ![newBook.page.js after adding the code snippet for pressing the Create button](ClickSaveBtnSnippet.png)
 
-16. To ensure that the save action was successful, verify that the **Edit** button is displayed. Add the expected behavior to your `bookshop.test.js`:
+17. To ensure that the save action was successful, verify that the **Edit** button is displayed. Add the expected behavior to your `bookshop.test.js`:
 
     ![bookshop.test.js after adding the code snippet for verifying that the edit button is displayed](EditButtonAssertion1.png)
 
-17. In the bookshop application, right-click the **Edit** button and choose **Highlight**.
+18. In the bookshop application, right-click the **Edit** button and choose **Highlight**.
 
-18. On the right side of the Test Recorder window you find a section with Properties and Bindings. Choose the icon that is located on the left of the property *enabled*. This will add `expect(enabled).toBeTruthy();` to the code snippet.
+19. On the right side of the Test Recorder window you find a section with Properties and Bindings. Choose the icon that is located on the left of the property *enabled*. This will add `expect(enabled).toBeTruthy();` to the code snippet.
 
     ![Code snipped with property "enabled"](EnabledButton.gif)
 
-19. Copy the generated code snippet from the Test Recorder into the `module.exports` section in your `newBook.page.js` and name the function `iSeeEditButton`.
+20. Copy the generated code snippet from the Test Recorder into the `module.exports` section in your `newBook.page.js` and name the function `iSeeEditButton`.
 
     It should look as follows:
 
     ![Page object after adding the code snippet from the test recorder](EditButtonAssertionPO.png)
 
-20. Let's proceed with our test scenario by implementing another `it` function in the `bookshop.test.js` file. To achieve that we need to add the skeleton of the *should check book is added* test function:
+21. Let's proceed with our test scenario by implementing another `it` function in the `bookshop.test.js` file. To achieve that we need to add the skeleton of the *should check book is added* test function:
 
     ```JavaScript
     it("should check book is added", async () => {
@@ -423,7 +423,7 @@ Create a wdi5 script to test the addition of detailed information to your newly 
     });
     ```
 
-21. In this `it` function we need two steps. First an action to navigate back to the list of books and a second step to assert that our newly created book is contained in the list. Implement this as follows in the *it* block:
+22. In this `it` function we need two steps. First an action to navigate back to the list of books and a second step to assert that our newly created book is contained in the list. Implement this as follows in the *it* block:
 
     ```JavaScript
     await NewBookPage.iNavigateBack();
@@ -433,27 +433,27 @@ Create a wdi5 script to test the addition of detailed information to your newly 
     Now, your test is complete. Make sure that it looks as follows:
     ![Complete test in newBook.page.js](TechedspecFile.png)
 
-22. To get the code-snippet for the implementation of the `NewBookPage.iNavigateBack` action, right-click the **<** *(Go Back)* button and choose **Press** in the bookshop application.
+23. To get the code-snippet for the implementation of the `NewBookPage.iNavigateBack` action, right-click the **<** *(Go Back)* button and choose **Press** in the bookshop application.
 
     ![Test recorder highlights the navigate back button](BackButton-PressEvent.gif)
 
-23. Again, copy the generated code snippet into the `module.exports` section of your `newBook.page.js` and name it `iNavigateBack`.
+24. Again, copy the generated code snippet into the `module.exports` section of your `newBook.page.js` and name it `iNavigateBack`.
 
     Your page object should now look as follows:
 
     ![Page object with action for pressing the back button](BackButtonVSCode.png)
 
-24. In your bookshop application, choose the **<** *(back)* button.
+25. In your bookshop application, choose the **<** *(back)* button.
 
     As a result, you should see the list of all books, including the one you've added.
 
-25. In the list of books of your bookshop application, right-click the title of the book you've created and choose **Highlight**. Make sure that only the specific Title of the row is blue highlighted and not the whole row.
+26. In the list of books of your bookshop application, right-click the title of the book you've created and choose **Highlight**. Make sure that only the specific Title of the row is blue highlighted and not the whole row.
 
-26. On the right side of the Test Recorder window you find a section with Properties and Bindings. Choose the icon that is located on the left of the property *visible* in the *Inherited* section. This will add `expect(visible).toBeTruthy();` to the code snippet.
+27. On the right side of the Test Recorder window you find a section with Properties and Bindings. Choose the icon that is located on the left of the property *visible* in the *Inherited* section. This will add `expect(visible).toBeTruthy();` to the code snippet.
 
     ![Test recorder highlights the book entry](Title-HighlightEvent.gif)
 
-27. Copy the generated code snippet into the `module.exports` section of your `manageBooks.page.js` and name the function `theBookListContains`. Here, pass the `sBook` as an argument in the function name and use it in the locator to identify the control by its text.
+28. Copy the generated code snippet into the `module.exports` section of your `manageBooks.page.js` and name the function `theBookListContains`. Here, pass the `sBook` as an argument in the function name and use it in the locator to identify the control by its text.
 
     It look as follows:
 
@@ -461,9 +461,9 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
 Choose **File** **→** **Save**.
 
-28. Right-click your *test\wdi5* folder in the **EXPLORER** pane and choose **Open in Integrated Terminal**.
+29. Right-click your *test\wdi5* folder in the **EXPLORER** pane and choose **Open in Integrated Terminal**.
 
-29. To run your test, execute the following command:
+30. To run your test, execute the following command:
 
     ```Bash/Shell
     npm run wdi5
@@ -525,9 +525,9 @@ Choose **File** **→** **Save**.
 
 
 
-30. In the **EXPLORER** pane, right-click the `timeline-report.html` in the `target` folder and choose **Reveal in File Explorer**.
+31. In the **EXPLORER** pane, right-click the `timeline-report.html` in the `target` folder and choose **Reveal in File Explorer**.
 
-31. Double-click the `timeline-report` in the file explorer:
+32. Double-click the `timeline-report` in the file explorer:
 
     ![timeline-report.html in the file explorer](ReportHtml.png)
 
