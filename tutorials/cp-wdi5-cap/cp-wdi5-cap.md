@@ -97,21 +97,25 @@ In Visual Studio Code, set up and run your bookshop application.
     npm install
     ```
 
-8. To start your bookshop application, execute the following commands:
+8. To start your bookshop application, execute the following command:
 
     ```Shell/Bash
-    npm run fiori
+    npm run start
     ```
 
 9. Open a new Terminal, for that choose **Terminal** **→** **New Terminal**
 
-10. Use the command `npm init wdi5@latest -- --configPath ./app/admin-books/webapp/test/wdi5/ --specs ./**/wdi5/specs/**.js --baseUrl http://localhost:4004/fiori-apps.html\#Books-manage` to call the quickstart installation of wdi5.
+10. To call the quickstart installation of wdi5 use the following command:
+
+    ```Shell/Bash
+    npm init wdi5@latest -- --configPath ./app/admin-books/webapp/test/wdi5/ --specs ./**/wdi5/specs/**.js --baseUrl http://localhost:4004/fiori-apps.html\#Books-manage
+    ```
 
     The console output should look as follows:
 
     ![Terminal response for the 'npm init wdi5' command](wdi5_init.png)
 
-11. In your project in the **EXPLORER** pane, choose **`fiori`** **→** **`app`** **→** **`admin-books`** **→** **`webapp`** **→** **`test`** **→** **`wdi5`**.
+11. In your project in the **EXPLORER** pane, choose **`app`** **→** **`admin-books`** **→** **`webapp`** **→** **`test`** **→** **`wdi5`**.
 
 12. Now you can see all the files through which you can define system tests with wdi5:
 
@@ -134,7 +138,7 @@ In Visual Studio Code, set up and run your bookshop application.
 
          Page objects use locators to identify specific elements on the screen. Thereby, they allow test runners to see and do anything a real user would. Page objects reside in the `pageobjects` folder of your project.
 
-13. Use the command `npm install --save wdio-timeline-reporter` to install the timeline reporter
+13. Use the command `npm install --save-dev wdio-timeline-reporter` to install the timeline reporter
 
     The console ouput should look as follows:
 
@@ -219,8 +223,9 @@ Familiarize yourself with your test scenario before starting to code it. Later, 
 
 9. Verify that the new book has been added to the list.
 
-    ![New book in the list](NewBook.png)
+    [New book in the list](NewBook.png)
 
+10. The created book will persist as long as the local server with the application is running. To start with a fresh database we have to stop the process and restart it again with `npm run start`
 [DONE]
 [ACCORDION-END]
 
@@ -381,7 +386,14 @@ Create a wdi5 script to test the addition of detailed information to your newly 
 
     ![newBook.page.js after adding the steps from choosing the author](CodeSnippetChooseAuthor.png)
 
-14. Now, in the overview window of your newly created book in the bookshop application, right-click the **Create** button and choose **Press**.
+12. In the *it* block of your `bookshop.test.js`, add the following line to select the create button at the bottom of the application:
+
+    ```JavaScript
+    await NewBookPage.iPressCreate();
+    await NewBookPage.iSeeEditButton()
+    ```
+
+14. Now, at the footer in the bookshop application, right-click the **Create** button and choose **Press**.
 
 15. Copy the generated snippet into the `module.exports` section of your `newBook.page.js`. Name the funcions `iPressCreate` and add the expected behavior to your `bookshop.test.js`.
 
