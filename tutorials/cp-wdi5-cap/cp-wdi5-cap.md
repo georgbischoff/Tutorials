@@ -536,6 +536,8 @@ Choose **File** **→** **Save**.
 
 [ACCORDION-BEGIN [Step 5: ](Set Up SAP Continuous Integration and Delivery)]
 
+    > **Note:** Please make sure that your chromedriver version in your `package.json` and in your `package-lock.json` file is compatible with the Chromium version supported by SAP Continuous Integration and Delivery. For more information on which Chromium version is supported, see [Supported Testing Tools](https://help.sap.com/docs/CONTINUOUS_DELIVERY/99c72101f7ee40d0b2deb4df72ba1ad3/5949283e74cf4735ae59de4a4d3a9773.html?version=Cloud#supported-testing-tools).
+    
 Enable SAP Continuous Integration and Delivery, add the required permissions for it, and access the service.
 
 1. Go to your SAP BTP cockpit and choose **Go To Your Trial Account**:
